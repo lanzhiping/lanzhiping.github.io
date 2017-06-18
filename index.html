@@ -1,13 +1,28 @@
 <html ng-app="app">
     <head>
-        <title>Nano SEO Learning</title>
-        <script type="text/javascript" src="dist/dependsource.min.js"></script>
-        <script type="text/javascript" src="dist/webProject.js"></script>
-        <link rel="stylesheet" type="text/css" href="dist/dependsource.min.css">
-        <link rel="stylesheet" type="text/css" href="dist/webProject.css">
+        <meta name="viewport" content="initial-scale = 1.0,maximum-scale = 1.0" />
+        <title>Nano</title>
+        <script type="text/javascript" src="dist/bundle.js"></script>
+        <link rel="stylesheet" type="text/css" href="dist/main.css">
     </head>
-    <body ng-controller="appCtrl">
-        {{text}}
-        <p>This will be my SEO learning practice.</p>
+    <body>
+        <div ng-controller="personInfoCtrl as ctrl" class="person-info">
+            <div class="person-info_title">{{ctrl.infoTitle}}</div>
+            <div ng-repeat-start="info in ctrl.info"></div>
+            <div ng-switch="info.type">
+                <img class="person-info_item" parallax ng-switch-when="avatar" ng-class="info.type" ng-src={{info.value}} />
+                <div class="person-info_item" parallax ng-switch-default ng-class="info.type">{{info.value}}</div>
+            </div>
+            <div ng-repeat-end></div>
+        </div>
+        <div ng-controller="techStackCtrl as ctrl" class="tech-stack">
+            <div class="tech-stack_title">{{ctrl.techStackTitle}}</div>
+            <div ng-repeat-start="tech in ctrl.techStack"></div>
+            <div class="tech-stack_item">
+                <img class="tech-stack_img" parallax ng-class="tech.type" ng-src={{tech.avatar}} />
+                <span class="tech-stack_name" parallax ng-class="tech.type">{{tech.name}}</span>
+            </div>
+            <div ng-repeat-end></div>
+        </div>
     </body>
 </html>

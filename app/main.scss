@@ -1,0 +1,31 @@
+$s-b: 320px;
+$m-b: 768px;
+$l-b: 1025px;
+
+$padding: 18px;
+$fontSize: 24px;
+
+@mixin medium {
+    @media screen and (min-width: $m-b) {
+        @content;
+    }
+}
+
+@mixin large {
+    @media screen and (min-width: $l-b) {
+        @content;
+    }
+}
+
+html {
+    font-family: fantasy;
+    font-size: $fontSize;
+
+    body {
+        padding: 0;
+        margin: 0;
+    }
+}
+
+@import './personInfoView/personInfo.scss';
+@import './techStackView/techStack.scss';

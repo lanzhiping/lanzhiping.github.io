@@ -1,0 +1,30 @@
+.tech-stack {
+    background-image: url(https://www.bing.com/az/hprichbg/rb/MadagascarLemurs_ROW7986241575_1920x1080.jpg);
+    background-attachment: fixed;
+    min-height: 100%;
+    text-align: center;
+
+    &_title {
+        padding: $padding 0;
+        background-color: #ffffff;
+    }
+
+    &_item {
+        color: #ffffff;
+        padding: $padding 0;
+    }
+
+    img.tech-stack_img {
+        padding: 0;
+        color: #ffffff;
+        margin: $padding 0;
+        border-radius: 50%;
+        background: #ffffff;
+        width: 20%;
+        vertical-align: middle;
+
+        @include medium {
+            max-width: 80px;
+        }
+    }
+}
