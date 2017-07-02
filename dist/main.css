@@ -10,15 +10,36 @@ html {
   background-attachment: fixed;
   min-height: 100%;
   text-align: center; }
+  @media screen and (min-width: 768px) {
+    .person-info {
+      display: table;
+      width: 100%; }
+      .person-info > div {
+        display: table-row; } }
   .person-info_item {
     color: #ffffff;
-    padding: 18px 0; }
+    padding-top: 18px; }
   .person-info_title {
     padding: 18px 0;
     background-color: #ffffff; }
-  .person-info .avatar {
+    @media screen and (min-width: 768px) {
+      .person-info_title {
+        display: block; } }
+  .person-info .avatar img {
     border-radius: 50%;
-    width: 25%; }
+    width: 25%;
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    max-width: 103px;
+    padding: 0; }
+    @media screen and (min-width: 768px) {
+      .person-info .avatar img {
+        bottom: auto;
+        left: auto;
+        right: 18px;
+        transform: none; } }
 
 .tech-stack {
   background-image: url(https://www.bing.com/az/hprichbg/rb/MadagascarLemurs_ROW7986241575_1920x1080.jpg);

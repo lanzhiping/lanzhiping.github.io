@@ -8,12 +8,10 @@
     <body>
         <div ng-controller="personInfoCtrl as ctrl" class="person-info">
             <div class="person-info_title">{{ctrl.infoTitle}}</div>
-            <div ng-repeat-start="info in ctrl.info"></div>
-            <div ng-switch="info.type">
-                <img class="person-info_item" parallax ng-switch-when="avatar" ng-class="info.type" ng-src={{info.value}} />
-                <div class="person-info_item" parallax ng-switch-default ng-class="info.type">{{info.value}}</div>
+            <div class="person-info_item" ng-switch="info.type" ng-class="info.type" ng-repeat="info in ctrl.info">
+                <img ng-switch-when="avatar" ng-src={{info.value}} />
+                <span ng-switch-default >{{info.value}}</span>
             </div>
-            <div ng-repeat-end></div>
         </div>
         <div ng-controller="techStackCtrl as ctrl" class="tech-stack">
             <div class="tech-stack_title">{{ctrl.techStackTitle}}</div>

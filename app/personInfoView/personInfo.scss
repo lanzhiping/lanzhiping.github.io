@@ -4,9 +4,18 @@
     min-height: 100%;
     text-align: center;
 
+    @include medium {
+        display: table;
+        width: 100%;
+
+        & > div {
+            display: table-row;
+        }
+    }
+
     &_item {
         color: #ffffff;
-        padding: $padding 0;
+        padding-top: $padding;
 
         @include medium {
 
@@ -16,10 +25,27 @@
     &_title {
         padding: $padding 0;
         background-color: #ffffff;
+
+        @include medium {
+            display: block;
+        }
     }
 
-    .avatar {
+    .avatar img {
         border-radius: 50%;
         width: 25%;
+        position: absolute;
+        bottom: $padding;
+        left: 50%;
+        transform: translateX(-50%);
+        max-width: 103px;
+        padding: 0;
+
+        @include medium {
+            bottom: auto;
+            left: auto;
+            right: $padding;
+            transform: none;
+        }
     }
 }

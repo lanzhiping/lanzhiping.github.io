@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -77,10 +77,10 @@ var angular = __webpack_require__(2);
 var parallaxDir = __webpack_require__(4);
 var personInfoService = __webpack_require__(6);
 var personInfoCtrl = __webpack_require__(5);
-var techStackService = __webpack_require__(11);
-var techStackCtrl = __webpack_require__(10);
+var techStackService = __webpack_require__(8);
+var techStackCtrl = __webpack_require__(7);
 
-__webpack_require__(7);
+__webpack_require__(9);
 
 (function (angular) {
     angular.module('app', []).directive('parallax', parallaxDir).service('personInfoService', personInfoService).controller('personInfoCtrl', personInfoCtrl).service('techStackService', techStackService).controller('techStackCtrl', techStackCtrl);
@@ -33546,20 +33546,6 @@ module.exports = [dataService];
 
 /***/ }),
 /* 7 */
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(0);
-
-
-/***/ }),
-/* 9 */,
-/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33575,7 +33561,7 @@ function TechStackCtrl(techStackService) {
 module.exports = ['techStackService', TechStackCtrl];
 
 /***/ }),
-/* 11 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -33586,6 +33572,19 @@ function dataService() {
 }
 
 module.exports = dataService;
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(0);
+
 
 /***/ })
 /******/ ]);
