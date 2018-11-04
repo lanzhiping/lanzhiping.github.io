@@ -6,7 +6,7 @@
 
     &_item {
         color: #ffffff;
-        padding: $padding 0;
+        padding-top: $padding;
 
         @include medium {
 
@@ -21,5 +21,9 @@
     .avatar {
         border-radius: 50%;
         width: 25%;
+        position: absolute;
+        bottom: $padding;
+        left: 50%;
+        transform: translateX(-50%);
     }
 }
