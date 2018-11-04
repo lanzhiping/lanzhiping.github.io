@@ -1,13 +1,11 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const pathRes = p => path.resolve(__dirname, p);
-const extractSass = new ExtractTextPlugin({
-    filename: "[name].css"
-});
 
 module.exports = {
-    entry: ['./app/index.js'],
+    mode: process.env.NODE_ENV || 'development',
+
+    entry: './app/index.js',
 
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -20,33 +18,25 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
-                loader: "babel-loader",
+                loader: 'babel-loader',
                 options: {
-                    presets: ["es2015"]
+                    presets: ['babel-preset-env']
                 },
             },
 
             {
                 test: /\.scss$/,
-                use: extractSass.extract({
-                    use: [{
-                        loader: "css-loader"
-                    }, {
-                        loader: "sass-loader"
-                    }]
-                })
+                use: ['style-loader', 'css-loader', 'sass-loader']
             }
         ]
     },
 
     plugins: [
-        extractSass,
-        new HtmlWebpackPlugin({ template: pathRes('index.html') }),
+        new HtmlWebpackPlugin({ template: pathRes('index.html'), favicon: 'favicon.ico' }),
     ],
 
     devServer: {
-        contentBase: pathRes('dist'),
         compress: true,
-        port: 9000
+        port: 9000,
     }
 };
