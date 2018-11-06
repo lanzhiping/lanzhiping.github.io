@@ -74,5 +74,17 @@ html {
     }
 }
 
+.frameworks {
+    div {
+        padding: 0 $padding * 2;
+    }
+
+    img {
+        height: 100px;
+        width: 100px;
+        border-radius: 50%;
+    }
+}
+
 // @import './personInfoView/personInfo.scss';
 // @import './techStackView/techStack.scss';
