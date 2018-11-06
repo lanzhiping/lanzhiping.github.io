@@ -1,10 +1,13 @@
 const path = require('path');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const pathRes = p => path.resolve(__dirname, p);
+const extractSass = new ExtractTextPlugin({
+    filename: "[name].css"
+});
 
 module.exports = {
-    mode: process.env.NODE_ENV || 'development',
-
     entry: './app/index.js',
 
     output: {
@@ -26,13 +29,21 @@ module.exports = {
 
             {
                 test: /\.scss$/,
-                use: ['style-loader', 'css-loader', 'sass-loader']
+                use: extractSass.extract({
+                    use: ['css-loader', 'sass-loader']
+                })
             }
         ]
     },
 
     plugins: [
-        new HtmlWebpackPlugin({ template: pathRes('index.html'), favicon: 'favicon.ico' }),
+        extractSass,
+        new HtmlWebpackPlugin({
+            template: pathRes('app/index.html'),
+            favicon: 'favicon.ico',
+            filename: pathRes('index.html')
+        }),
+        new UglifyJsPlugin()
     ],
 
     devServer: {

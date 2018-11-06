@@ -1,12 +1,23 @@
 const scrollHandlerList = [];
 
-window.onscroll = function(e) {
-    scrollHandlerList
-        .forEach(handler => handler(e));
+function handlerScrolling(e) {
+    scrollHandlerList.forEach(handler => handler(e));
 }
 
-function onScroll(handler) {
-    scrollHandlerList.push(handler);
+function onScroll(handler, options = {}) {
+    if (options.leading) {
+        handler();
+    }
+
+    if (options.optimize && window.requiestAnimationFrame) {
+        scrollHandlerList.push(() => {
+            window.requestAnimationFrame(() => handler(e));
+        })
+    } else {
+        scrollHandlerList.push(handler);
+    }
 }
 
-module.exports = onScroll;
+window.onscroll = handlerScrolling;
+
+export default onScroll;
