@@ -1,5 +1,4 @@
 import hyperhtml from 'hyperhtml';
-import onScroll from './onScroll';
 import parallax from './parallax';
 import './main.scss';
 

@@ -4,7 +4,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const pathRes = p => path.resolve(__dirname, p);
 const extractSass = new ExtractTextPlugin({
-    filename: "[name].css"
+    filename: "[name].[hash:5].css"
 });
 
 module.exports = {
@@ -13,7 +13,7 @@ module.exports = {
     output: {
         path: path.resolve(__dirname, 'dist'),
 
-        filename: 'bundle.js'
+        filename: 'bundle.[hash:5].js'
     },
 
     module: {

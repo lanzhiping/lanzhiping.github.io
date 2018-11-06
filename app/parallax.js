@@ -2,9 +2,9 @@ import onScroll from './onScroll';
 
 function parallax(container, element) {
     onScroll(() => {
-        const { y } = container.getBoundingClientRect();
-        element.style.top = `${Math.max(y, 0)}px`;
-        element.children[0].style.top = `-${Math.max(y, 0)}px`;
+        const { top } = container.getBoundingClientRect();
+        element.style.top = `${Math.max(top, 0)}px`;
+        element.children[0].style.top = `-${Math.max(top, 0)}px`;
     }, { leading: true });
 }
 
