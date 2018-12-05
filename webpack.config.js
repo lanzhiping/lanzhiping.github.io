@@ -2,6 +2,7 @@ const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const HtmlWebpackHarddiskPlugin = require('html-webpack-harddisk-plugin');
 const pathRes = p => path.resolve(__dirname, p);
 const extractSass = new ExtractTextPlugin({
     filename: "[name].[hash:5].css"
@@ -11,9 +12,8 @@ module.exports = {
     entry: './app/index.js',
 
     output: {
-        path: path.resolve(__dirname, 'dist'),
-
-        filename: 'bundle.[hash:5].js'
+        path: pathRes('dist'),
+        filename: '[name]_[hash:5].js'
     },
 
     module: {
@@ -39,11 +39,13 @@ module.exports = {
     plugins: [
         extractSass,
         new HtmlWebpackPlugin({
+            filename: './index.html',
             template: pathRes('app/index.html'),
             favicon: 'favicon.ico',
-            filename: pathRes('index.html')
+            alwaysWriteToDisk: true
         }),
-        new UglifyJsPlugin()
+        new UglifyJsPlugin(),
+        new HtmlWebpackHarddiskPlugin()
     ],
 
     devServer: {

@@ -81,6 +81,14 @@ html {
         padding: 0 $padding;
     }
 
+    .backbonejs {
+        display: inline-block;
+        background-size: cover;
+        background-position: -2% 0;
+        background-repeat: no-repeat;
+    }
+
+    .backbonejs,
     img {
         height: 30px;
         width: 30px;
@@ -94,6 +102,7 @@ html {
             padding: $padding $padding * 2;
         }
 
+        .backbonejs,
         img {
             height: 80px;
             width: 80px;

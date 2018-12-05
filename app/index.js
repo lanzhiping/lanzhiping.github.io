@@ -1,12 +1,12 @@
 import hyperhtml from 'hyperhtml';
 import parallax from './parallax';
-import './main.scss';
+import './index.scss';
 
 class Frameworks {
     constructor(el) {
         this.frameworks = [
             { name: 'AngularJS', type: 'frontend', avatar: 'https://avatars.githubusercontent.com/angular?s=200' },
-            { name: 'BackboneJS', type: 'frontend', avatar: 'http://enzolutions.com/assets/img/backbonejs-logo-small.png' },
+            { name: 'BackboneJS', type: 'frontend', avatar: 'http://backbonejs.org/docs/images/backbone.png' },
             { name: 'ReactJs', type: 'frontend', avatar: 'https://avatars.githubusercontent.com/reactjs?s=200' },
             { name: 'Ant Design', type: 'frontend', avatar: 'https://avatars.githubusercontent.com/ant-design?s=200' },
             { name: 'ReduxJs', type: 'frontend', avatar: 'https://avatars.githubusercontent.com/reduxjs?s=200' },
@@ -32,9 +32,10 @@ class Frameworks {
     render() {
         this.template`
             <div>
-                ${this.frameworks.map(f => hyperhtml`
-                    <span><img src=${f.avatar} alt=${f.name}/></span>
-                `)}
+                ${this.frameworks.map(f => f.name === 'BackboneJS'
+                    ? hyperhtml`<span class="backbonejs" style=${`background-image:url(${f.avatar});`}></span>`
+                    : hyperhtml`<span><img src=${f.avatar} alt=${f.name}/></span>`
+                )}
             </div>
         `;
     }
