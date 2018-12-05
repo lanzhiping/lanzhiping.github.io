@@ -1,3 +1,5 @@
+@import './oswald.scss';
+
 $s-b: 320px;
 $m-b: 768px;
 $l-b: 1025px;
@@ -49,7 +51,7 @@ html {
 
         &:after {
             content: '';
-            background: rgba($overlayColor, 0.3);
+            background: rgba($overlayColor, 0.2);
             position: absolute;
             display: block;
             height: 100%;
@@ -111,14 +113,40 @@ html {
     }
 }
 
+.architects {
+    text-align: center;
+    color: $fontColor;
+    background: $fontColor;
+
+    div {
+        font-family: 'Oswald', sans-serif;
+        font-size: 2 * $fontSize;
+        font-weight: bold;
+        padding: 0 $padding;
+        -webkit-text-fill-color: transparent;
+        -webkit-background-clip: text;
+        background-image: url(/assets/text_background.png);
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: 50% 30%;
+    }
+
+    @include medium() {
+        div {
+            font-size: 3 * $fontSize;
+            font-weight: bold;
+        }
+    }
+}
+
 .projects {
-    background-color: rgba($overlayColor, 0.3);
+    background-color: rgba($overlayColor, 0.2);
     position: relative;
     height: 100vh;
 
     &:before {
         content: '';
-        background: rgba($overlayColor, 0.3);
+        background: rgba($overlayColor, 0.2);
         position: absolute;
         display: block;
         height: 100%;
@@ -138,11 +166,11 @@ html {
 
     .projects_contact {
         position: absolute;
-        color: $fontColor;
-        top: 50%;
+        top: 90%;
         transform: translateY(-50%);
+        color: $fontColor;
         text-align: center;
-        width: 100%;
+        right: 0;
 
         a {
             color: $fontColor;
