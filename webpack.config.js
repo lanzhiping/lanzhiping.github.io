@@ -39,7 +39,7 @@ module.exports = {
     plugins: [
         extractSass,
         new HtmlWebpackPlugin({
-            filename: './index.html',
+            filename: pathRes('index.html'),
             template: pathRes('app/index.html'),
             favicon: 'favicon.ico',
             alwaysWriteToDisk: true
@@ -49,6 +49,7 @@ module.exports = {
     ],
 
     devServer: {
+        publicPath: '/dist/',
         compress: true,
         port: 9000,
     }
