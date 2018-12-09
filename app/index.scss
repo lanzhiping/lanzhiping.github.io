@@ -5,12 +5,15 @@ $m-b: 768px;
 $l-b: 1025px;
 
 $padding: 18px;
-
 $fontSize: 24px;
 
+$backgroundColor: #ffffff;
+$backgroundColor2: #232d31;
 $overlayColor: #3e3e3e;
 
 $fontColor: #ffffff;
+$fontColor2: #607d8b;
+
 
 @mixin medium {
     @media screen and (min-width: $m-b) {
@@ -34,107 +37,39 @@ html {
     }
 }
 
-.intro {
-    height: 100vh;
-    position: relative;
+.architects {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    width: 100%;
+    text-align: center;
+    white-space: pre-line;
 
-    &_background {
-        height: 100%;
-
-        img,
-        video {
-            object-fit: cover;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-        }
+    div {
+        position: relative;
+        text-transform: capitalize, lowercase;
+        display: inline-block;
+        color: $fontColor;
+        margin: $padding auto;
+        font-weight: bold;
 
         &:after {
-            content: '';
-            background: rgba($overlayColor, 0.2);
             position: absolute;
-            display: block;
-            height: 100%;
-            width: 100%;
-        }
-    }
-
-    &_content {
-        color: $fontColor;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        text-align: center;
-        width: 100%;
-
-        .avatar {
-            height: 100px;
-            width: 100px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-    }
-}
-
-.frameworks {
-    background: $fontColor;
-
-    div {
-        padding: 0 $padding;
-    }
-
-    .backbonejs {
-        display: inline-block;
-        background-size: cover;
-        background-position: -2% 0;
-        background-repeat: no-repeat;
-    }
-
-    .backbonejs,
-    img {
-        height: 30px;
-        width: 30px;
-        border-radius: 50%;
-        box-shadow: 0px 1px 1px rgba($overlayColor, 0.5);
-        margin: $padding / 2;
-    }
-
-    @include medium {
-        div {
-            padding: $padding $padding * 2;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -$padding;
+            content: '';
+            display: inline-block;
+            width: 120px;
+            height: 3px;
+            background: $backgroundColor;
         }
 
-        .backbonejs,
-        img {
-            height: 80px;
-            width: 80px;
-            margin: $padding;
-        }
-    }
-}
-
-.architects {
-    text-align: center;
-    color: $fontColor;
-    background: $fontColor;
-
-    div {
-        font-family: 'Oswald', sans-serif;
-        font-size: 2 * $fontSize;
-        font-weight: bold;
-        padding: 0 $padding;
-        -webkit-text-fill-color: transparent;
-        -webkit-background-clip: text;
-        background-image: url(/assets/text_background.jpg);
-        background-repeat: no-repeat;
-        background-size: cover;
-        background-position: 50% 30%;
-    }
-
-    @include medium() {
-        div {
-            font-size: 3 * $fontSize;
-            font-weight: bold;
+        &:last-child {
+            &:after {
+                display: none;
+            }
         }
     }
 }
@@ -142,7 +77,7 @@ html {
 .projects {
     background-color: rgba($overlayColor, 0.2);
     position: relative;
-    height: 100vh;
+    height: 80vh;
 
     &:before {
         content: '';
@@ -151,31 +86,20 @@ html {
         display: block;
         height: 100%;
         width: 100%;
+        z-index: 1;
     }
 
     .projects_background {
-        height: 100vh;
-
         img {
             object-fit: cover;
             width: 100%;
-            height: 100%;
+            height: 100vh;
             position: absolute;
         }
     }
 
-    .projects_contact {
-        position: absolute;
-        top: 90%;
-        transform: translateY(-50%);
-        color: $fontColor;
-        text-align: center;
-        right: 0;
-
-        a {
-            color: $fontColor;
-            text-decoration-line: none;
-        }
+    @include medium() {
+        height: 56vw;
     }
 }
 
@@ -190,3 +114,23 @@ html {
         transform: translate3d(0, 0, 0);
     }
 }
+
+.contact {
+    background: $backgroundColor2;
+    color: $fontColor;
+    right: 0;
+    padding: $padding;
+    font-size: $fontSize / 1.5;
+
+    div {
+        padding-bottom: $padding / 2;
+    }
+
+    a {
+        color: $fontColor;
+        text-decoration-line: none;
+    }
+}
+
+@import './Header.scss';
+@import './Frameworks.scss';
