@@ -44,9 +44,8 @@ module.exports = {
             favicon: 'favicon.ico',
             alwaysWriteToDisk: true
         }),
-        new UglifyJsPlugin(),
-        new HtmlWebpackHarddiskPlugin()
-    ],
+        new HtmlWebpackHarddiskPlugin(),
+    ].concat(process.env.NODE_ENV === 'production' ? new UglifyJsPlugin() : []),
 
     devServer: {
         publicPath: '/dist/',

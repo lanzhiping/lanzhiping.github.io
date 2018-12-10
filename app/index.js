@@ -1,6 +1,7 @@
 import Frameworks from './Frameworks';
 import Header from './Header';
 import parallax from './parallax';
+import analytics from './analytics';
 import './index.scss';
 
 function playVideo() {
@@ -25,5 +26,6 @@ function startApp() {
     parallax('.intro', '.intro_background');
     parallax('.projects', '.projects_background');
     playVideo();
+    analytics.trackView();
 }
 startApp();
