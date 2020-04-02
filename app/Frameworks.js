@@ -10,11 +10,11 @@ class Frameworks {
             { name: 'BackboneJS', type: 'frontend', avatar: 'http://backbonejs.org/docs/images/backbone.png' },
             { name: 'Sass', type: 'frontend', avatar: 'https://avatars.githubusercontent.com/sass?s=200' },
             { name: 'BabelJS', type: 'frontend', avatar: 'https://avatars.githubusercontent.com/babel?s=200' },
-            { name: 'PostCSS', type: 'frontend', avatar: 'https://avatars.githubusercontent.com/postcss?s=200' },
+            { name: 'Styled Components', type: 'frontend', avatar: 'https://cdn.shopify.com/s/files/1/1061/1924/products/Nail_Polish_Emoji_Icon_ios10_grande.png?v=1571606091' },
             { name: 'JasmineJS', type: 'frontend', avatar: 'https://avatars.githubusercontent.com/jasmine?s=200' },
             { name: 'WebpackJS', type: 'frontend', avatar: 'https://avatars.githubusercontent.com/webpack?s=200' },
             { name: 'ExpressJS', type: 'frontend', avatar: 'https://avatars.githubusercontent.com/expressjs?s=200' },
-            { name: 'NodeJS', type: 'frontend', avatar: 'http://3apples.co/wp-content/uploads/2016/08/nodejs-128.png' },
+            { name: 'NodeJS', type: 'frontend', avatar: 'https://nodejs.org/static/images/logos/js-green.svg' },
             { name: 'MongoDB', type: 'frontend', avatar: 'https://avatars.githubusercontent.com/mongodb?s=200' },
             { name: 'TypeScript', type: 'frontend', avatar: 'https://raw.githubusercontent.com/github/explore/6c6508f34230f0ac0d49e847a326429eefbfc030/topics/typescript/typescript.png' }
         ];

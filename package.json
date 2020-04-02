@@ -1,7 +1,7 @@
 {
-    "name": "webProject",
+    "name": "github_page",
     "version": "1.0.0",
-    "description": "This is nano web project",
+    "description": "Zhiping Lan github page",
     "homepage": "http://lanzhiping.github.io",
     "scripts": {
         "dev": "webpack-dev-server --devtool source-map",
@@ -24,7 +24,8 @@
         "uglifyjs-webpack-plugin": "^1.3.0",
         "webpack": "^2.6.1",
         "webpack-cli": "^3.1.2",
-        "webpack-dev-server": "^2.9.1"
+        "webpack-dev-server": "^2.9.1",
+        "serialize-javascript": ">=2.1.1"
     },
     "browserlist": "> 5%"
 }
