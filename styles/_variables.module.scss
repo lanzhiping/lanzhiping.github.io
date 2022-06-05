@@ -1,0 +1,44 @@
+$smallBreakpoint: 320px;
+$mediumBreakpoint: 768px;
+$largeBreakpoint: 1025px;
+
+$padding: 18px;
+
+$bgColor1: #ffffff;
+$bgColor2: #f2f2f2;
+$bgColor3: #3e3e3e;
+$bgColor4: #264d59;
+$bgColor5: #43978d;
+$bgColor6: #f9e07f;
+$bgColor7: #f9ad6a;
+$bgColor8: #d46c4e;
+
+$fontSize1: 16px;
+$fontSize2: 20px;
+$fontSize3: 24px;
+
+$fontWeight1: 200;
+$fontWeight2: 400;
+$fontWeight3: 600;
+
+$fontColor1: #ffffff;
+$fontColor2: #000000;
+$fontColor3: #3e3e3e;
+$fontColor4: #43978d;
+$fontColor5: #f9e07f;
+$fontColor6: #f9ad6a;
+$fontColor7: #d46c4e;
+$fontColor8: #264d59;
+$fontColor9: rgba(0, 0, 0, 0);
+
+@mixin medium {
+  @media screen and (min-width: $mediumBreakpoint) {
+    @content;
+  }
+}
+
+@mixin large {
+  @media screen and (min-width: $largeBreakpoint) {
+    @content;
+  }
+}

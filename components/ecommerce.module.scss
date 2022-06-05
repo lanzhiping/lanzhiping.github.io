@@ -1,0 +1,45 @@
+@import "../styles/_variables.module.scss";
+
+.container {
+  position: relative;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+}
+
+.imageContainer {
+  height: 100px;
+  overflow: hidden;
+
+  @include medium() {
+    height: 100%;
+    overflow: visible;
+  }
+}
+
+.image {
+  height: 100vh;
+  width: auto;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-32%);
+
+  @include medium() {
+    height: 300vh;
+  }
+}
+
+.description {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  color: $fontColor1;
+  font-size: 4vw;
+  text-transform: capitalize;
+
+  @include medium() {
+    position: absolute;
+    top: 60%;
+  }
+}

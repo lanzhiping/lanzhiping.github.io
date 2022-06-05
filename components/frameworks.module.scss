@@ -1,0 +1,12 @@
+@import "../styles/_variables.module.scss";
+
+.imageContainer {
+  display: inline-block;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 0.5rem solid $bgColor7;
+  vertical-align: middle;
+  background-color: $bgColor1;
+}
