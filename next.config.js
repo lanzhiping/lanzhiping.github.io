@@ -5,6 +5,7 @@ const path = require("path");
 const nextConfig = {
   reactStrictMode: true,
   images: {
+    loader: "custom",
     domains: [
       "avatars.githubusercontent.com",
       "raw.githubusercontent.com",

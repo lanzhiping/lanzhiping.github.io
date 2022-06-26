@@ -2,6 +2,7 @@ import Image from "next/image";
 import classnames from "classnames";
 import styles from "./frameworks.module.scss";
 import { useScrollContext } from "../context/scrollContext";
+import { imageLoader } from "./imageLoader";
 
 const data = {
   reactjs: {
@@ -83,9 +84,9 @@ const Framework = ({
 }) => (
   <div className={`${styles.imageContainer} ${className}`} style={style}>
     {layout ? (
-      <Image src={avatar} alt={name} layout={layout} />
+      <Image loader={imageLoader} src={avatar} alt={name} layout={layout} />
     ) : (
-      <Image src={avatar} alt={name} width={100} height={100} />
+      <Image loader={imageLoader} src={avatar} alt={name} width={100} height={100} />
     )}
   </div>
 );

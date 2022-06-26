@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { imageLoader } from "./imageLoader";
 import styles from "./links.module.scss";
 
 const data = {
@@ -22,6 +23,7 @@ const About = () => {
       <div className={styles.topContainer}>
         <div className={styles.avatar}>
           <Image
+            loader={imageLoader}
             alt="Zhiping's avatar"
             src={data.avatar}
             width={500}
