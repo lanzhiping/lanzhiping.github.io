@@ -1,7 +1,7 @@
 @import "../styles/_variables.module.scss";
 
 .container {
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,7 +11,20 @@
   white-space: nowrap;
   overflow: hidden;
 
-  .intro {
+  &Fixed {
+    position: fixed;
+    width: 100vw;
+  }
+  &Sticked {
+    position: absolute;
+    width: 100vw;
+    bottom: 0;
+  }
+  &Bg1 {
+    background: $bgColor8;
+  }
+  &Bg2 {
+    background: $bgColor7;
   }
 }
 
@@ -40,5 +53,14 @@
 
   @include large {
     font-size: 4rem;
+  }
+
+  transition: all 0.3s;
+
+  &Left {
+    padding-right: 2rem;
+  }
+  &Right {
+    padding-left: 2rem;
   }
 }

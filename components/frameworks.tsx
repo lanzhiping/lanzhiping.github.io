@@ -1,21 +1,13 @@
-import styles from "./frameworks.module.scss";
 import Image from "next/image";
+import classnames from "classnames";
+import styles from "./frameworks.module.scss";
+import { useScrollContext } from "../context/scrollContext";
 
 const data = {
   reactjs: {
     name: "ReactJS",
     type: "frontend",
     avatar: "https://avatars.githubusercontent.com/reactjs?s=200",
-  },
-  angularjs: {
-    name: "AngularJS",
-    type: "frontend",
-    avatar: "https://avatars.githubusercontent.com/angular?s=200",
-  },
-  backbonejs: {
-    name: "BackboneJS",
-    type: "frontend",
-    avatar: "/imgs/backbonejs.png",
   },
   sass: {
     name: "Sass",
@@ -64,6 +56,16 @@ const data = {
     avatar:
       "https://raw.githubusercontent.com/jenkinsci/jenkins/master/.idea/icon.svg",
   },
+  angularjs: {
+    name: "AngularJS",
+    type: "frontend",
+    avatar: "https://avatars.githubusercontent.com/angular?s=200",
+  },
+  backbonejs: {
+    name: "BackboneJS",
+    type: "frontend",
+    avatar: "/imgs/backbonejs.png",
+  },
 };
 
 const Framework = ({
@@ -71,13 +73,15 @@ const Framework = ({
   name,
   className,
   layout,
+  style,
 }: {
   avatar: string;
   name: string;
   className?: string;
   layout?: "fixed" | "fill" | "intrinsic" | "responsive" | "raw";
+  style: object;
 }) => (
-  <div className={`${styles.imageContainer} ${className}`}>
+  <div className={`${styles.imageContainer} ${className}`} style={style}>
     {layout ? (
       <Image src={avatar} alt={name} layout={layout} />
     ) : (
@@ -87,10 +91,33 @@ const Framework = ({
 );
 
 const Frameworks = () => {
+  const { percentage } = useScrollContext(4);
+
+  const containerClasses = classnames({
+    [styles.container]: true,
+    [styles.containerFixed]: percentage >= 0.5 && percentage < 1,
+    [styles.containerSticked]: percentage === 1,
+  });
+
+  const frameworkClasses = (index) =>
+    classnames({
+      [styles[`framework${index + 1}`]]: true,
+    });
+
+  const imageY = (index, percentage) => (index) * percentage * 50;
+
   return (
-    <div>
-      {Object.values(data).map((framework) => (
-        <Framework {...framework} key={framework.name} />
+    <div className={containerClasses}>
+      {Object.values(data).map((framework, index) => (
+        <Framework
+          {...framework}
+          key={framework.name}
+          className={frameworkClasses(index)}
+          style={{
+            transition: "all 0.3s",
+            transform: `translateY(-${imageY(index, percentage)}%)`,
+          }}
+        />
       ))}
     </div>
   );

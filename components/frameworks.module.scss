@@ -1,5 +1,36 @@
 @import "../styles/_variables.module.scss";
 
+.container {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+
+  &Fixed {
+    position: fixed;
+    width: 100vw;
+    top: 0;
+  }
+  &Sticked {
+    position: absolute;
+    width: 100vw;
+    bottom: 0;
+  }
+}
+
+@for $i from 1 through 12 {
+  .framework#{$i} {
+    position: absolute;
+    left: random($limit: 80) + 0vw;
+    bottom: random($limit: 50) - 30vw;
+  }
+}
+
+.framework {
+  position: absolute;
+  left: clamp(20, random($limit: 100), 80) + 0vw;
+}
+
 .imageContainer {
   display: inline-block;
   width: 100px;
@@ -9,4 +40,11 @@
   border: 0.5rem solid $bgColor7;
   vertical-align: middle;
   background-color: $bgColor1;
+
+  position: static;
+  margin: 5rem 1rem;
+  
+  @include medium() {
+    position: absolute;
+  }
 }
