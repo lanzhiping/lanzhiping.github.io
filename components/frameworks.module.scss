@@ -26,11 +26,6 @@
   }
 }
 
-.framework {
-  position: absolute;
-  left: clamp(20, random($limit: 100), 80) + 0vw;
-}
-
 .imageContainer {
   display: inline-block;
   width: 100px;
@@ -40,7 +35,6 @@
   border: 0.5rem solid $bgColor7;
   vertical-align: middle;
   background-color: $bgColor1;
-
   position: static;
   margin: 5rem 1rem;
   
@@ -48,3 +42,4 @@
     position: absolute;
   }
 }
+
