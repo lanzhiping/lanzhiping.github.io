@@ -6,15 +6,20 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
-        <title>Zhiping Lan</title>
         <meta
           name="viewport"
           content="initial-scale = 1.0,maximum-scale = 1.0"
         />
+        <title>Zhiping&apos;s Github page</title>
         <meta
           name="description"
           content="This is Zhiping Lan introduction website. Hosted from Github."
         />
+        <meta property="og:url" content="https://lanzhiping.github.io/" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Zhiping&apos;s Github page" />
+        <meta property="og:description" content="This is Zhiping Lan introduction website. Hosted from Github." />
+        <meta property="og:image" content="https://github.githubassets.com/images/modules/open_graph/github-logo.png" />
       </Head>
       <Script
         id="gtag-init"
