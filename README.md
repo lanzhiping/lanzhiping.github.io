@@ -1,3 +1,3 @@
 # lanzhiping.github.io
 
-Hello world!
+My Github page

@@ -1,0 +1,30 @@
+@import "../styles/_variables.module.scss";
+
+.container {
+  background-color: $bgColor4;
+}
+
+.section1 {
+  height: 200vh;
+  background-color: $bgColor4;
+  position: relative;
+  width: 100vw;
+}
+.section2 {
+  height: 200vh;
+  background-color: $bgColor1;
+  position: relative;
+  width: 100vw;
+}
+.section3 {
+  height: 200vh;
+  background-color: $bgColor1;
+  position: relative;
+  width: 100vw;
+}
+.section4 {
+  height: 200vh;
+  background-color: $bgColor8;
+  position: relative;
+  width: 100vw;
+}

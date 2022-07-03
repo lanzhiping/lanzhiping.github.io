@@ -1,0 +1,66 @@
+@import "../styles/_variables.module.scss";
+
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 2em;
+
+  white-space: nowrap;
+  overflow: hidden;
+
+  &Fixed {
+    position: fixed;
+    width: 100vw;
+  }
+  &Sticked {
+    position: absolute;
+    width: 100vw;
+    bottom: 0;
+  }
+  &Bg1 {
+    background: $bgColor8;
+  }
+  &Bg2 {
+    background: $bgColor7;
+  }
+}
+
+.intro {
+  font-size: 2rem;
+  letter-spacing: 0.2rem;
+  font-weight: $fontWeight3;
+  text-align: center;
+  text-transform: uppercase;
+
+  span {
+    padding: 0 1rem;
+    color: $fontColor9;
+    -webkit-text-stroke: $fontColor1 1px;
+    -moz-text-stroke: $fontColor1 1px;
+  }
+  span:nth-child(2) {
+    color: $fontColor4;
+    -webkit-text-stroke: 0;
+    -moz-text-stroke: 0;
+  }
+
+  @include medium() {
+    font-size: 3rem;
+  }
+
+  @include large {
+    font-size: 4rem;
+  }
+
+  transition: all 0.3s;
+
+  &Left {
+    padding-right: 2rem;
+  }
+  &Right {
+    padding-left: 2rem;
+  }
+}

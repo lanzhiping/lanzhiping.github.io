@@ -1,0 +1,65 @@
+@import "../styles/_variables.module.scss";
+
+.container {
+  position: relative;
+  overflow: hidden;
+  height: 100vh;
+  width: 100vw;
+
+  &Fixed {
+    position: fixed;
+    width: 100vw;
+    top: 0;
+  }
+  &Sticked {
+    position: absolute;
+    width: 100vw;
+    bottom: 0;
+  }
+}
+
+.imageContainer {
+  overflow: hidden;
+
+  @include medium() {
+    height: 100%;
+    overflow: visible;
+    padding-top: inherit;
+  }
+}
+
+.image {
+  height: 100vh;
+  width: auto;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translateX(-50%) translateY(-32%) scale(0.5);
+  transition: all 0.3s;
+
+  @include medium() {
+    height: 300vh;
+    transform: translateX(-50%) translateY(-32%);
+  }
+}
+
+.description {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  font-size: 2rem;
+  text-transform: capitalize;
+  transition: all 0.3s;
+  color: $fontColor8;
+
+  @include medium() {
+    color: $fontColor1;
+    font-size: 4vw;
+    position: absolute;
+    top: 60%;
+  }
+
+  &Contrast {
+    color: $fontColor8;
+  }
+}
