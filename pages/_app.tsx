@@ -33,6 +33,13 @@ const MyApp = ({ Component, pageProps }) => {
             ga('send', 'pageview');`,
         }}
       />
+      <Script
+        id="anaytics-init"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `(function(){fetch('https://zhiping-analytics.onrender.com/trackView',{method: "GET",mode: "cors"}).then(()=>{}).catch(()=>{});})();`,
+        }}
+      />
       <Component {...pageProps} />
     </>
   );
