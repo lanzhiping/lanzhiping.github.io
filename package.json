@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "export": "next export -o docs",
+    "export": "next export -o docs && touch docs/.nojekyll",
     "lint": "next lint"
   },
   "dependencies": {
