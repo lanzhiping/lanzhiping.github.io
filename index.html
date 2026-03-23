@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Loading...</title>
+    <script>
+      (() => {
+        const storedTheme = localStorage.getItem("theme");
+        const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
+          ? "dark"
+          : "light";
+        document.documentElement.dataset.theme = storedTheme || systemTheme;
+      })();
+    </script>
+    <script>
+      fetch("./content/generated-site.md")
+        .then((response) => (response.ok ? response.text() : ""))
+        .then((raw) => {
+          const match = raw.match(/(?:^|\n)title:\s*["']?(.+?)["']?(?:\n|$)/);
+          if (match) document.title = match[1];
+        })
+        .catch(() => {});
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="brand-area">
+          <a class="brand" href="#top" id="site-title">Loading...</a>
+        </div>
+        <div class="toolbar">
+          <label class="searchbox" for="post-search">
+            <span class="searchbox-icon">⌕</span>
+            <input id="post-search" type="search" placeholder="" />
+          </label>
+          <button
+            class="theme-toggle"
+            id="theme-toggle"
+            type="button"
+            aria-label=""
+            title=""
+          >
+            <span class="theme-toggle-light"></span>
+            <span class="theme-toggle-dark"></span>
+          </button>
+          <nav class="nav" id="site-nav"></nav>
+        </div>
+      </header>
+
+      <main class="layout" id="app"></main>
+    </div>
+
+    <script type="module" src="./main.js"></script>
+  </body>
+</html>

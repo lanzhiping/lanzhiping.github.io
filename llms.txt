@@ -1,0 +1,17 @@
+# Zhiping Lan
+
+This website belongs to Zhiping Lan.
+
+ExpediaGroup | GE HealthCare | EPAM Systems | Teleopti
+
+A senior software engineer and tech lead with 10+ years of experience building scalable web applications and leading technical initiatives across travel, healthcare, retail, workforce management, and AI-related products.
+
+Throughout my career, I've had the opportunity to work with leading organizations including ExpediaGroup, GE HealthCare, EPAM Systems, Teleopti, and FDT AI, where I've built and launched partner platforms, enterprise dashboards, medical-device asset systems, e-commerce experiences, scheduling products, and internal tooling that empowered multiple teams.
+
+My expertise spans AWS Cloud, CI/CD pipelines, React and TypeScript ecosystems, frontend architecture, technical mentoring, and collaborative partnerships with product and design teams to deliver impactful solutions.
+
+## AI Resources
+
+- [Claude Code Skill](./generated/claude-code-skill.md): 
+- [AI Context JSON](./generated/ai-context.json): 
+- [llms.txt](./llms.txt): 

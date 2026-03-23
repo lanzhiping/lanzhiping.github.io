@@ -1,0 +1,21 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="675" fill="#F7F3EC"/>
+  <rect x="75" y="82" width="230" height="510" rx="24" fill="#1B1B1B"/>
+  <rect x="365" y="158" width="190" height="110" rx="18" fill="#D7CAB9"/>
+  <rect x="365" y="290" width="190" height="110" rx="18" fill="#D7CAB9"/>
+  <rect x="365" y="422" width="190" height="110" rx="18" fill="#D7CAB9"/>
+  <rect x="645" y="132" width="485" height="410" rx="24" fill="#FFFDF8" stroke="#D9CBB8" stroke-width="4"/>
+  <rect x="695" y="192" width="385" height="34" rx="12" fill="#1B1B1B"/>
+  <rect x="695" y="252" width="265" height="18" rx="9" fill="#C0673C"/>
+  <rect x="695" y="290" width="320" height="18" rx="9" fill="#D8C8B6"/>
+  <rect x="695" y="328" width="290" height="18" rx="9" fill="#D8C8B6"/>
+  <rect x="695" y="390" width="150" height="120" rx="18" fill="#C0673C"/>
+  <rect x="875" y="390" width="205" height="120" rx="18" fill="#EFE4D6"/>
+  <path d="M305 336H365" stroke="#C0673C" stroke-width="10" stroke-linecap="round"/>
+  <path d="M555 336H645" stroke="#C0673C" stroke-width="10" stroke-linecap="round"/>
+  <text x="112" y="146" fill="#FFFDF8" font-family="IBM Plex Sans, sans-serif" font-size="28">content/</text>
+  <text x="401" y="224" fill="#1B1B1B" font-family="IBM Plex Sans, sans-serif" font-size="22">profile-main.md</text>
+  <text x="401" y="356" fill="#1B1B1B" font-family="IBM Plex Sans, sans-serif" font-size="22">post-*.md</text>
+  <text x="401" y="488" fill="#1B1B1B" font-family="IBM Plex Sans, sans-serif" font-size="22">project-*.md</text>
+  <text x="776" y="158" fill="#8A7F73" font-family="IBM Plex Sans, sans-serif" font-size="24">Generated portfolio page</text>
+</svg>
