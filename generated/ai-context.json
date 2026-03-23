@@ -1,0 +1,192 @@
+{
+  "site": {
+    "title": "Zhiping Lan",
+    "person": "Zhiping Lan",
+    "googleAnalyticsId": "",
+    "generatedAt": "2026-03-23T16:35:24.447Z"
+  },
+  "ai": {
+    "panelTitle": "AI Access",
+    "panelIntro": "AI tools can read generated summaries of this site and use them as a lightweight Claude Code skill context.",
+    "panelLinks": [
+      "Claude Code Skill|./generated/claude-code-skill.md",
+      "AI Context JSON|./generated/ai-context.json",
+      "llms.txt|./llms.txt"
+    ]
+  },
+  "profile": {
+    "name": "Zhiping Lan",
+    "tagline": "Senior Software Engineer | Tech Lead | Scalable Web Systems",
+    "topics": [
+      "senior software engineering",
+      "tech lead",
+      "web architecture",
+      "aws cloud",
+      "ci/cd",
+      "team leadership",
+      "frontend platforms",
+      "expedia",
+      "ge healthcare"
+    ],
+    "links": [
+      "Email|mailto:lanzhiping6@gmail.com",
+      "Phone|tel:+8618565707513",
+      "Website|https://lanzhiping.github.io",
+      "LinkedIn|https://linkedin.com/in/zhiping-lan-a51117b9"
+    ],
+    "bio": "ExpediaGroup | GE HealthCare | EPAM Systems | Teleopti\n\nA senior software engineer and tech lead with 10+ years of experience building scalable web applications and leading technical initiatives across travel, healthcare, retail, workforce management, and AI-related products.\n\nThroughout my career, I've had the opportunity to work with leading organizations including ExpediaGroup, GE HealthCare, EPAM Systems, Teleopti, and FDT AI, where I've built and launched partner platforms, enterprise dashboards, medical-device asset systems, e-commerce experiences, scheduling products, and internal tooling that empowered multiple teams.\n\nMy expertise spans AWS Cloud, CI/CD pipelines, React and TypeScript ecosystems, frontend architecture, technical mentoring, and collaborative partnerships with product and design teams to deliver impactful solutions."
+  },
+  "recentBlogs": [
+    {
+      "title": "Building a Shared Charting Library Across Multiple Expedia Teams",
+      "summary": "How a reusable charting library reduced duplication, standardized data visualization, and improved delivery speed across internal teams.",
+      "date": "2025-07-08",
+      "updated": "",
+      "status": "",
+      "category": "",
+      "tags": [
+        "expedia",
+        "frontend architecture",
+        "typescript",
+        "react",
+        "design systems"
+      ],
+      "repo": "",
+      "docs": "",
+      "file": "post-expedia-charting-library.md",
+      "content": "Context\n\nAt Expedia Group, I built a custom charting library that was adopted across multiple teams. The original problem was repeated effort: teams were solving similar data visualization needs with inconsistent implementations, styling, and maintenance costs.\n\nWhat I Want To Expand Later\n\nThe design constraints that pushed us toward a shared library\nThe API design decisions that helped adoption\nHow we balanced flexibility with consistency\n\nDraft Story\n\nThe core goal was not just to build components, but to create a reliable internal platform for product teams shipping metrics-heavy experiences. By packaging shared charting patterns into a reusable library, we reduced duplication and made dashboards easier to build and maintain.\n\nThis project also created a common language for frontend teams. Instead of rebuilding chart behavior for each surface, teams could focus on business logic and product outcomes.\n\nPlaceholder For Results\n\nI want to add more concrete adoption numbers, before-and-after implementation examples, and lessons learned from rollout."
+    },
+    {
+      "title": "Leading Frontend Architecture for a Rate Automation System",
+      "summary": "A draft write-up on leading frontend architecture for a large product initiative in Expedia PartnerCentral.",
+      "date": "2025-06-28",
+      "updated": "",
+      "status": "",
+      "category": "",
+      "tags": [
+        "expedia",
+        "frontend",
+        "architecture",
+        "graphql",
+        "react"
+      ],
+      "repo": "",
+      "docs": "",
+      "file": "post-expedia-rate-automation.md",
+      "content": "Context\n\nI led the frontend architecture for a rate automation system in Expedia PartnerCentral. The product area focused on helping partners manage pricing workflows more effectively inside a large-scale platform serving Expedia's global hotel partners.\n\nWhat Happened\n\nThis initiative required balancing product flexibility, architecture consistency, and long-term maintainability. As a technical lead, I worked across implementation details and broader system direction while partnering closely with PMs and UX designers.\n\nPlaceholder Details To Fill In\n\nThe product problem and target user flow\nThe main technical decisions behind the frontend architecture\nPerformance, adoption, or operational impact after launch\nLessons from coordinating across teams and legacy systems\n\nWhy This Matters\n\nThis was one of the clearest examples of combining technical leadership with product thinking. It was not only about writing code, but also about shaping direction, mentoring others, and keeping the system scalable as the initiative grew."
+    },
+    {
+      "title": "Shared UI Platform and Internal NPM Package",
+      "summary": "Integrated a new UI toolkit into legacy systems through a reusable internal NPM package, improving consistency and easing adoption across teams.",
+      "date": "2025-06-28",
+      "updated": "",
+      "status": "",
+      "category": "",
+      "tags": [
+        "expedia",
+        "frontend",
+        "architecture",
+        "graphql",
+        "react"
+      ],
+      "repo": "",
+      "docs": "",
+      "file": "post-expedia-shared-ui-platform.md",
+      "content": "This work focused on modernization without forcing full rewrites. By wrapping the new UI toolkit in a reusable package, I helped teams adopt a more consistent component foundation while still working within legacy constraints."
+    },
+    {
+      "title": "Executing a Zero-Downtime AWS Account Migration",
+      "summary": "A placeholder draft covering the zero-downtime migration of a core application across AWS accounts.",
+      "date": "2025-06-18",
+      "updated": "",
+      "status": "",
+      "category": "",
+      "tags": [
+        "aws",
+        "migration",
+        "platform",
+        "devops",
+        "reliability"
+      ],
+      "repo": "",
+      "docs": "",
+      "file": "post-expedia-aws-migration.md",
+      "content": "Migration Goal\n\nOne of my notable achievements at Expedia Group was executing a zero-downtime AWS account migration for a core application. The challenge was to preserve system reliability while changing an important piece of the operational foundation.\n\nDraft Focus Areas\n\nMigration planning and rollout strategy\nRisk reduction and fallback planning\nCoordination across engineering and platform stakeholders\nWhat made zero-downtime execution possible\n\nPlaceholder For More Detail\n\nI want to add the architecture diagram, migration sequencing, and verification steps I used so this can become a stronger technical case study later."
+    },
+    {
+      "title": "Building Asset Performance Management for Medical Devices",
+      "summary": "A draft post about building an asset performance management system in the healthcare technology domain.",
+      "date": "2025-06-08",
+      "updated": "",
+      "status": "",
+      "category": "",
+      "tags": [
+        "ge healthcare",
+        "medical devices",
+        "enterprise software",
+        "react",
+        "redux"
+      ],
+      "repo": "",
+      "docs": "",
+      "file": "post-ge-apm.md",
+      "content": "Context\n\nAt GE HealthCare, I worked in the healthcare business unit and built an Asset Performance Management system for medical devices. This work sat at the intersection of enterprise software, reliability, and healthcare operations.\n\nWhy It Was Important\n\nThe project required careful attention to product quality, maintainability, and team collaboration. It also became a strong example of how I contributed beyond implementation by mentoring peers, interviewing candidates, and supporting onboarding.\n\nPlaceholder Details To Fill In\n\nThe user and business problem behind the platform\nWhat the system helped teams monitor or improve\nKey frontend or platform design choices\nWhat I learned from working in a healthcare technology environment"
+    }
+  ],
+  "pastProjects": [
+    {
+      "title": "Burberry E-commerce Experience",
+      "summary": "Contributed to Burberry's e-commerce web application at EPAM Systems, with a focus on frontend delivery, performance improvement, and server-side rendering.",
+      "date": "",
+      "updated": "",
+      "status": "Delivered",
+      "category": "",
+      "tags": [],
+      "repo": "",
+      "docs": "",
+      "file": "project-burberry-ecommerce.md",
+      "content": "Key contributions included frontend development for the e-commerce experience, performance improvements through server-side rendering and image optimization, and team enablement through JavaScript fundamentals training, onboarding support, and interviews."
+    },
+    {
+      "title": "Expedia PartnerCentral",
+      "summary": "Worked on Expedia PartnerCentral, a property management platform serving Expedia's global hotel partners, with contributions spanning dashboards, rate automation, competitiveness tooling, and platform migration work.",
+      "date": "",
+      "updated": "",
+      "status": "Delivered",
+      "category": "",
+      "tags": [],
+      "repo": "",
+      "docs": "",
+      "file": "project-expedia-partnercentral.md",
+      "content": "Expedia PartnerCentral is the strongest example of my recent work at scale. I contributed as both an individual engineer and a technical lead, partnering with PMs and UX designers, mentoring junior developers, helping shape architecture, and supporting team delivery processes.\n\nHighlights from this work include a dynamic metrics dashboard, a shared charting library used across teams, a rate automation system, a partner competitiveness optimization system, and a zero-downtime AWS account migration of a core application."
+    },
+    {
+      "title": "GE HealthCare Asset Performance Management",
+      "summary": "Built an Asset Performance Management system for medical devices in GE HealthCare's healthcare business unit.",
+      "date": "",
+      "updated": "",
+      "status": "Delivered",
+      "category": "",
+      "tags": [],
+      "repo": "",
+      "docs": "",
+      "file": "project-ge-apm.md",
+      "content": "This project combined enterprise engineering discipline with product reliability requirements in a healthcare environment. It also reflected my broader technical leadership through peer mentoring, interviewing, onboarding support, and steady delivery."
+    },
+    {
+      "title": "Teleopti Workforce Scheduling Tools",
+      "summary": "Built enterprise scheduling tools at Teleopti, including seat planning and automated shift scheduling systems.",
+      "date": "",
+      "updated": "",
+      "status": "Delivered",
+      "category": "",
+      "tags": [],
+      "repo": "",
+      "docs": "",
+      "file": "project-teleopti-workforce.md",
+      "content": "This work included AngularJS- and KnockoutJS-based product development, enterprise workflow design, product demos, and close collaboration with an international team using XP practices like pair programming."
+    }
+  ],
+  "claudeCodeSkills": [],
+  "races": []
+}

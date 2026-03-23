@@ -1,0 +1,24 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="675" fill="#F6EFE6"/>
+  <rect x="62" y="58" width="1076" height="559" rx="28" fill="#FFF9F1" stroke="#D4C2AF" stroke-width="4"/>
+  <rect x="120" y="118" width="250" height="438" rx="22" fill="#201E1D"/>
+  <rect x="404" y="118" width="280" height="438" rx="22" fill="#BF4D28"/>
+  <rect x="718" y="118" width="320" height="438" rx="22" fill="#E9D5C1"/>
+  <circle cx="245" cy="208" r="54" fill="#F6EFE6" fill-opacity="0.14"/>
+  <circle cx="544" cy="208" r="54" fill="#FFF7EF" fill-opacity="0.18"/>
+  <circle cx="878" cy="208" r="54" fill="#BF4D28" fill-opacity="0.15"/>
+  <path d="M207 318H285" stroke="#F6EFE6" stroke-width="18" stroke-linecap="round"/>
+  <path d="M483 300H604" stroke="#FFF7EF" stroke-width="18" stroke-linecap="round"/>
+  <path d="M790 300H968" stroke="#BF4D28" stroke-width="18" stroke-linecap="round"/>
+  <path d="M176 396H313" stroke="#F6EFE6" stroke-width="12" stroke-linecap="round" opacity="0.7"/>
+  <path d="M454 378H632" stroke="#FFF7EF" stroke-width="12" stroke-linecap="round" opacity="0.75"/>
+  <path d="M790 378H968" stroke="#BF4D28" stroke-width="12" stroke-linecap="round" opacity="0.65"/>
+  <path d="M176 438H285" stroke="#F6EFE6" stroke-width="12" stroke-linecap="round" opacity="0.45"/>
+  <path d="M454 420H599" stroke="#FFF7EF" stroke-width="12" stroke-linecap="round" opacity="0.5"/>
+  <path d="M790 420H918" stroke="#BF4D28" stroke-width="12" stroke-linecap="round" opacity="0.4"/>
+  <path d="M350 338H404" stroke="#BF4D28" stroke-width="8" stroke-linecap="round"/>
+  <path d="M684 338H718" stroke="#201E1D" stroke-width="8" stroke-linecap="round"/>
+  <text x="120" y="92" fill="#8A7F73" font-family="IBM Plex Sans, sans-serif" font-size="28">APP</text>
+  <text x="404" y="92" fill="#8A7F73" font-family="IBM Plex Sans, sans-serif" font-size="28">AGENT</text>
+  <text x="718" y="92" fill="#8A7F73" font-family="IBM Plex Sans, sans-serif" font-size="28">INTERFACE</text>
+</svg>
