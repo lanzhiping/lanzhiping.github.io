@@ -1,9 +1,9 @@
 ---
 type: post
-title: "Building a Shared Charting Library Across Multiple Expedia Teams"
 date: "2025-07-08"
 reading_time: "6 min read"
 image: "./assets/post-ai-first-ui-web.svg"
+title: "Building a Shared Charting Library Across Multiple Expedia Teams"
 image_alt: "Abstract system graphic representing a reusable frontend visualization platform"
 tags: ["expedia", "frontend architecture", "typescript", "react", "design systems"]
 summary: "How a reusable charting library reduced duplication, standardized data visualization, and improved delivery speed across internal teams."

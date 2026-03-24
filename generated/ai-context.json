@@ -3,7 +3,7 @@
     "title": "Zhiping Lan",
     "person": "Zhiping Lan",
     "googleAnalyticsId": "",
-    "generatedAt": "2026-03-23T16:35:24.447Z"
+    "generatedAt": "2026-03-24T16:49:18.716Z"
   },
   "ai": {
     "panelTitle": "AI Access",
@@ -32,11 +32,29 @@
       "Email|mailto:lanzhiping6@gmail.com",
       "Phone|tel:+8618565707513",
       "Website|https://lanzhiping.github.io",
-      "LinkedIn|https://linkedin.com/in/zhiping-lan-a51117b9"
+      "LinkedIn|https://linkedin.com/in/zhiping-lan-a51117b9|linkedin.com/in/zhiping-lan"
     ],
     "bio": "ExpediaGroup | GE HealthCare | EPAM Systems | Teleopti\n\nA senior software engineer and tech lead with 10+ years of experience building scalable web applications and leading technical initiatives across travel, healthcare, retail, workforce management, and AI-related products.\n\nThroughout my career, I've had the opportunity to work with leading organizations including ExpediaGroup, GE HealthCare, EPAM Systems, Teleopti, and FDT AI, where I've built and launched partner platforms, enterprise dashboards, medical-device asset systems, e-commerce experiences, scheduling products, and internal tooling that empowered multiple teams.\n\nMy expertise spans AWS Cloud, CI/CD pipelines, React and TypeScript ecosystems, frontend architecture, technical mentoring, and collaborative partnerships with product and design teams to deliver impactful solutions."
   },
   "recentBlogs": [
+    {
+      "title": "AI-First UI Components",
+      "summary": "Inspiring AI-First UI components, empowered traditional UI with AI capabilities",
+      "date": "2026-03-23",
+      "updated": "",
+      "status": "",
+      "category": "",
+      "tags": [
+        "expedia",
+        "frontend",
+        "architecture",
+        "react"
+      ],
+      "repo": "",
+      "docs": "",
+      "file": "post-expedia-ai-first-ui.md",
+      "content": "Context\n\nIn the era of AI, everyone is talking about how to build an all-in-one chat web application like ChatGPT. However, that will be a huge breaking change for users and developers. Instead, I am more interested in how we can build AI-First UI components that can be easily integrated into existing applications, empowering traditional UI with AI capabilities without requiring a complete overhaul.\n\nAI-First UI Components\n\ndrafting..."
+    },
     {
       "title": "Building a Shared Charting Library Across Multiple Expedia Teams",
       "summary": "How a reusable charting library reduced duplication, standardized data visualization, and improved delivery speed across internal teams.",
@@ -139,33 +157,33 @@
       "summary": "Contributed to Burberry's e-commerce web application at EPAM Systems, with a focus on frontend delivery, performance improvement, and server-side rendering.",
       "date": "",
       "updated": "",
-      "status": "Delivered",
+      "status": "",
       "category": "",
       "tags": [],
       "repo": "",
       "docs": "",
       "file": "project-burberry-ecommerce.md",
-      "content": "Key contributions included frontend development for the e-commerce experience, performance improvements through server-side rendering and image optimization, and team enablement through JavaScript fundamentals training, onboarding support, and interviews."
+      "content": "Project\n\nThis project involved contributing to the development of Burberry's e-commerce web application, which serves as a critical platform for the brand's online retail presence. My role encompassed frontend development, performance optimization, and implementing server-side rendering to enhance user experience and SEO.\n\nDetails\n\nKey contributions included frontend development for the e-commerce experience, performance improvements through server-side rendering and image optimization, and team enablement through JavaScript fundamentals training, onboarding support, and interviews."
     },
     {
       "title": "Expedia PartnerCentral",
       "summary": "Worked on Expedia PartnerCentral, a property management platform serving Expedia's global hotel partners, with contributions spanning dashboards, rate automation, competitiveness tooling, and platform migration work.",
       "date": "",
       "updated": "",
-      "status": "Delivered",
+      "status": "",
       "category": "",
       "tags": [],
       "repo": "",
       "docs": "",
       "file": "project-expedia-partnercentral.md",
-      "content": "Expedia PartnerCentral is the strongest example of my recent work at scale. I contributed as both an individual engineer and a technical lead, partnering with PMs and UX designers, mentoring junior developers, helping shape architecture, and supporting team delivery processes.\n\nHighlights from this work include a dynamic metrics dashboard, a shared charting library used across teams, a rate automation system, a partner competitiveness optimization system, and a zero-downtime AWS account migration of a core application."
+      "content": "PartnerCentral\n\nExpedia PartnerCentral is the strongest example of my recent work at scale. I contributed as both an individual engineer and a technical lead, partnering with PMs and UX designers, mentoring junior developers, helping shape architecture, and supporting team delivery processes.\n\nHighlights from this work include a dynamic metrics dashboard, a shared charting library used across teams, a rate automation system, a partner competitiveness optimization system, and a zero-downtime AWS account migration of a core application."
     },
     {
       "title": "GE HealthCare Asset Performance Management",
       "summary": "Built an Asset Performance Management system for medical devices in GE HealthCare's healthcare business unit.",
       "date": "",
       "updated": "",
-      "status": "Delivered",
+      "status": "",
       "category": "",
       "tags": [],
       "repo": "",
@@ -178,7 +196,7 @@
       "summary": "Built enterprise scheduling tools at Teleopti, including seat planning and automated shift scheduling systems.",
       "date": "",
       "updated": "",
-      "status": "Delivered",
+      "status": "",
       "category": "",
       "tags": [],
       "repo": "",

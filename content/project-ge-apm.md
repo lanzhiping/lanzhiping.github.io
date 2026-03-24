@@ -1,7 +1,7 @@
 ---
 type: project
 title: "GE HealthCare Asset Performance Management"
-status: "Delivered"
+image: "./assets/project-ge-apm.jpg"
 summary: "Built an Asset Performance Management system for medical devices in GE HealthCare's healthcare business unit."
 ---
 

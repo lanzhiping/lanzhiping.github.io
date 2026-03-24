@@ -2,11 +2,12 @@
 type: profile
 name: "Zhiping Lan"
 image: "./assets/profile-photo.svg"
+photo: "./assets/zhiping-profile-photo.jpg"
 about_link: "#projects-panel"
 tagline: "Senior Software Engineer | Tech Lead | Scalable Web Systems"
 ga_measurement_id: ""
 topics: ["senior software engineering", "tech lead", "web architecture", "aws cloud", "ci/cd", "team leadership", "frontend platforms", "expedia", "ge healthcare"]
-links: ["Email|mailto:lanzhiping6@gmail.com", "Phone|tel:+8618565707513", "Website|https://lanzhiping.github.io", "LinkedIn|https://linkedin.com/in/zhiping-lan-a51117b9"]
+links: ["Email|mailto:lanzhiping6@gmail.com", "Phone|tel:+8618565707513", "Website|https://lanzhiping.github.io", "LinkedIn|https://linkedin.com/in/zhiping-lan-a51117b9|linkedin.com/in/zhiping-lan"]
 ---
 
 **ExpediaGroup | GE HealthCare | EPAM Systems | Teleopti**

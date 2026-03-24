@@ -2,6 +2,7 @@
 - profile-main.md
 - config-ui.md
 - config-ai.md
+- post-expedia-ai-first-ui.md
 - post-expedia-aws-migration.md
 - post-expedia-charting-library.md
 - post-expedia-rate-automation.md
