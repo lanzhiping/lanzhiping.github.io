@@ -379,10 +379,6 @@ img {
   margin-bottom: 18px;
 }
 
-.profile-media--about .profile-media-image {
-  filter: grayscale(1);
-}
-
 .rich-text {
   color: color-mix(in srgb, var(--text) 84%, var(--muted) 16%);
   line-height: 1.7;
@@ -569,6 +565,14 @@ img {
 
 :root[data-theme="dark"] .card-link-main.has-card-image::before {
   background: rgba(30, 30, 30, 0.70);
+}
+
+.project-card-link.has-card-image::before {
+  background: linear-gradient(180deg, rgba(23, 23, 23, 0.35) 0%, rgba(23, 23, 23, 0.95) 100%);
+}
+
+:root[data-theme="dark"] .project-card-link.has-card-image::before {
+  background: linear-gradient(180deg, rgba(23, 23, 23, 0.35) 0%, rgba(23, 23, 23, 0.95) 100%);
 }
 
 .post-card-content {

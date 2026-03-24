@@ -162,8 +162,8 @@ function formatDate(value) {
 
 function parsePairs(items) {
   return (Array.isArray(items) ? items : []).map((item) => {
-    const [key, ...rest] = item.split("|");
-    return { key: (key || "").trim(), value: rest.join("|").trim() };
+    const [key, url, label] = item.split("|");
+    return { key: (key || "").trim(), value: (url || "").trim(), label: (label || "").trim() || null };
   });
 }
 
@@ -173,6 +173,29 @@ function toLabelMap(items) {
 
 function createSectionTitle(title) {
   return `<div class="section-header"><h2 class="panel-title">${title}</h2></div>`;
+}
+
+function renderProfileMedia(profile, className = "") {
+  const placeholder = profile.image || "";
+  const photo = profile.photo || profile.image_lazy || "";
+  if (!placeholder && !photo) return "";
+
+  const classes = ["profile-media", className].filter(Boolean).join(" ");
+  const alt = profile.name || "";
+  const placeholderAlt = photo ? "" : alt;
+
+  return `
+    <div class="${classes}" data-profile-media ${photo ? `data-profile-photo="${photo}"` : ""}>
+      ${placeholder
+      ? `<img class="profile-media-image profile-media-placeholder" src="${placeholder}" alt="${placeholderAlt}" ${photo ? 'aria-hidden="true"' : ""} />`
+      : ""
+    }
+      ${photo
+      ? `<img class="profile-media-image profile-media-photo" src="${photo}" alt="${alt}" loading="lazy" decoding="async" />`
+      : ""
+    }
+    </div>
+  `;
 }
 
 function getPostPath(post) {
@@ -200,6 +223,11 @@ function getRouteFromHash() {
   if (parts[0] === "projects" && parts[1]) return { name: "project-detail", params: { slug: parts[1] }, search: url.searchParams };
   if (parts[0] === "projects") return { name: "projects", params: {}, search: url.searchParams };
   return { name: "home", params: {}, search: url.searchParams };
+}
+
+function getSearchRoute(query) {
+  const trimmed = query.trim();
+  return trimmed ? `#/posts?q=${encodeURIComponent(trimmed)}` : "#/posts";
 }
 
 async function loadEntries() {
@@ -241,6 +269,11 @@ function renderUi(site, ui) {
   toggle.title = ui.theme_toggle_aria_label || "";
   document.querySelector(".theme-toggle-light").textContent = ui.theme_light_label || "";
   document.querySelector(".theme-toggle-dark").textContent = ui.theme_dark_label || "";
+
+  const searchSubmit = document.querySelector("#search-submit");
+  if (searchSubmit) {
+    searchSubmit.textContent = ui.search_button_label || "Search";
+  }
 }
 
 function resolveNavHref(label, fallbackHref) {
@@ -341,14 +374,13 @@ function renderHomeView() {
       <section class="panel" data-motion="rise">
         ${createSectionTitle(state.uiLabels.about || "")}
         <article class="about-card">
-          ${profile.image ? `<img src="${profile.image}" alt="${profile.name || ""}" />` : ""}
+          ${renderProfileMedia(profile, "profile-media--about")}
           <div class="rich-text">${profile.previewHtml || profile.html || ""}</div>
           <a class="inline-link" href="#/about">${state.uiLabels.read_more || "Read more"} <span>${state.uiLabels.read_more_arrow || ""}</span></a>
         </article>
       </section>
-      ${
-        profile.topics?.length
-          ? `
+      ${profile.topics?.length
+      ? `
             <section class="panel" data-motion="rise">
               ${createSectionTitle(state.uiLabels.topics || "")}
               <div class="topic-list">
@@ -356,28 +388,26 @@ function renderHomeView() {
               </div>
             </section>
           `
-          : ""
-      }
+      : ""
+    }
     </aside>
 
     <section class="content-rail">
-      ${
-        featuredPost
-          ? `
+      ${featuredPost
+      ? `
             <article class="hero panel" data-motion="hero">
               ${createSectionTitle(state.uiLabels.featured || "")}
               <div class="hero-shell motion-tilt${featuredPost.image ? " has-feature-image" : ""}" data-href="${getPostPath(featuredPost)}">
-                ${
-                  featuredPost.image
-                    ? `
+                ${featuredPost.image
+        ? `
                       <a class="hero-media-link" href="${getPostPath(featuredPost)}" aria-label="${featuredPost.title || ""}">
                         <div class="hero-media">
                           <img class="feature-image" src="${featuredPost.image}" alt="${featuredPost.image_alt || featuredPost.title || ""}" />
                         </div>
                       </a>
                     `
-                    : ""
-                }
+        : ""
+      }
                 <div class="hero-content">
                   <a class="hero-title-link" href="${getPostPath(featuredPost)}">
                     <h1 class="hero-title">${featuredPost.title || ""}</h1>
@@ -385,31 +415,29 @@ function renderHomeView() {
                   <div class="meta-row">
                     <span>${formatDate(featuredPost.date)}</span>
                     ${(Array.isArray(featuredPost.tags) ? featuredPost.tags : [])
-                      .map((tag) => `<a href="${getTagPath(tag)}">${tag}</a>`)
-                      .join("")}
+        .map((tag) => `<a href="${getTagPath(tag)}">${tag}</a>`)
+        .join("")}
                   </div>
                   <p class="hero-summary">${featuredPost.summary || ""}</p>
                 </div>
               </div>
             </article>
           `
-          : ""
-      }
+      : ""
+    }
 
       <section class="posts-grid panel" data-motion="rise">
         ${createSectionTitle(state.uiLabels.posts || "")}
         <div class="post-list">
-          ${
-            filteredPosts.length
-              ? filteredPosts.map(renderPostCard).join("")
-              : `<p class="empty-state">${state.uiLabels.empty_post_search || ""}</p>`
-          }
+          ${filteredPosts.length
+      ? filteredPosts.map(renderPostCard).join("")
+      : `<p class="empty-state">${state.uiLabels.empty_post_search || ""}</p>`
+    }
         </div>
       </section>
 
-      ${
-        state.projects.length
-          ? `
+      ${state.projects.length
+      ? `
             <section class="projects panel" data-motion="rise">
               ${createSectionTitle(state.uiLabels.projects || "")}
               <div class="project-list">
@@ -417,18 +445,17 @@ function renderHomeView() {
               </div>
             </section>
           `
-          : ""
-      }
+      : ""
+    }
 
-      ${
-        state.skills.length
-          ? `
+      ${state.skills.length
+      ? `
             <section class="skills panel" data-motion="rise">
               ${createSectionTitle(state.uiLabels.skills || "")}
               <div class="skill-list">
                 ${state.skills
-                  .map(
-                    (skill) => `
+        .map(
+          (skill) => `
                       <article class="skill-card">
                         <h3>${skill.title || ""}</h3>
                         <div class="meta-row">
@@ -436,37 +463,34 @@ function renderHomeView() {
                           <span>${skill.updated ? formatDate(skill.updated) : ""}</span>
                         </div>
                         <p class="summary">${skill.summary || ""}</p>
-                        ${
-                          skill.repo || skill.docs
-                            ? `<div class="skill-links">
+                        ${skill.repo || skill.docs
+              ? `<div class="skill-links">
                                 ${skill.repo ? `<a class="pill-link" href="${skill.repo}">${state.uiLabels.skill_repo_label || ""}</a>` : ""}
                                 ${skill.docs ? `<a class="pill-link" href="${skill.docs}">${state.uiLabels.skill_docs_label || ""}</a>` : ""}
                               </div>`
-                            : ""
-                        }
+              : ""
+            }
                       </article>
                     `
-                  )
-                  .join("")}
+        )
+        .join("")}
               </div>
             </section>
           `
-          : ""
-      }
+      : ""
+    }
     </section>
 
     <aside class="sidebar right-rail">
-      ${
-        state.races.length
-          ? `
+      ${state.races.length
+      ? `
             <section class="panel" data-motion="rise">
               ${createSectionTitle(state.uiLabels.races || "")}
               <div class="race-stack">
-                ${
-                  completedRaces.length
-                    ? completedRaces
-                        .map(
-                          (race) => `
+                ${completedRaces.length
+        ? completedRaces
+          .map(
+            (race) => `
                             <article class="race-card">
                               <h3>${race.title || ""}</h3>
                               <div class="race-meta">
@@ -477,21 +501,19 @@ function renderHomeView() {
                               ${race.status ? `<div class="race-status">${race.status}</div>` : ""}
                             </article>
                           `
-                        )
-                        .join("")
-                    : `<p class="empty-state">${state.uiLabels.empty_races || ""}</p>`
-                }
+          )
+          .join("")
+        : `<p class="empty-state">${state.uiLabels.empty_races || ""}</p>`
+      }
               </div>
-              ${
-                upcomingRaces.length || state.uiLabels.upcoming_races
-                  ? `
+              ${upcomingRaces.length || state.uiLabels.upcoming_races
+        ? `
                     <div class="section-header"><h2 class="panel-title">${state.uiLabels.upcoming_races || ""}</h2></div>
                     <div class="race-stack">
-                      ${
-                        upcomingRaces.length
-                          ? upcomingRaces
-                              .map(
-                                (race) => `
+                      ${upcomingRaces.length
+          ? upcomingRaces
+            .map(
+              (race) => `
                                   <article class="race-card">
                                     <h3>${race.title || ""}</h3>
                                     <div class="race-meta">
@@ -502,52 +524,50 @@ function renderHomeView() {
                                     ${race.status ? `<div class="race-status">${race.status}</div>` : ""}
                                   </article>
                                 `
-                              )
-                              .join("")
-                          : `<p class="empty-state">${state.uiLabels.empty_upcoming_races || ""}</p>`
-                      }
+            )
+            .join("")
+          : `<p class="empty-state">${state.uiLabels.empty_upcoming_races || ""}</p>`
+        }
                     </div>
                   `
-                  : ""
-              }
+        : ""
+      }
             </section>
           `
-          : ""
-      }
+      : ""
+    }
 
-      ${
-        aiLinks.length || state.ai.panel_intro
-          ? `
+      ${aiLinks.length || state.ai.panel_intro
+      ? `
             <section class="panel" data-motion="rise">
         ${createSectionTitle(state.ai.panel_title || "")}
         ${state.ai.panel_intro ? `<p class="panel-copy">${state.ai.panel_intro}</p>` : ""}
         ${aiLinks.length ? `<div class="ai-links">${aiLinks.map((entry) => `<a class="pill-link" href="${entry.value}">${entry.key}</a>`).join("")}</div>` : ""}
       </section>
     `
-          : ""
-      }
+      : ""
+    }
 
-      ${
-        contactLinks.length
-          ? `
+      ${contactLinks.length
+      ? `
             <section class="panel" data-motion="rise">
               ${createSectionTitle(state.uiLabels.connect || "")}
               <div class="contact-list">
                 ${contactLinks
-                  .map(
-                    (entry) => `
+        .map(
+          (entry) => `
                       <a class="contact-item" href="${entry.value}">
                         <span class="contact-label">${entry.key}</span>
                         <span>${entry.value.replace(/^https?:\/\//, "")}</span>
                       </a>
                     `
-                  )
-                  .join("")}
+        )
+        .join("")}
               </div>
             </section>
           `
-          : ""
-      }
+      : ""
+    }
     </aside>
   `;
 }
@@ -564,39 +584,38 @@ function renderPageIntro(eyebrow, title, copy) {
 
 function renderAboutView() {
   const links = parsePairs(state.profile.links);
+  console.log("Parsed profile links:", links);
   return `
     <section class="page-view">
       ${renderPageIntro("Profile", state.profile.name || "About", state.profile.tagline || "")}
       <section class="panel detail-grid">
         <article class="detail-card" data-motion="rise">
-          ${state.profile.image ? `<img class="detail-image portrait" src="${state.profile.image}" alt="${state.profile.name || ""}" />` : ""}
+          ${renderProfileMedia(state.profile, "detail-image portrait")}
           <div class="rich-text">${state.profile.html || ""}</div>
         </article>
         <aside class="detail-sidebar">
-          ${
-            links.length
-              ? `
+          ${links.length
+      ? `
                 <section class="panel inset-panel" data-motion="rise">
                   ${createSectionTitle(state.uiLabels.connect || "Contact")}
                   <div class="contact-list">
                     ${links
-                      .map(
-                        (entry) => `
+        .map(
+          (entry) => `
                           <a class="contact-item" href="${entry.value}">
                             <span class="contact-label">${entry.key}</span>
-                            <span>${entry.value.replace(/^https?:\/\//, "")}</span>
+                            <span>${entry.label || entry.value.replace(/^https?:\/\//, "").replace(/^mailto:/, "").replace(/^tel:/, "")}</span>
                           </a>
                         `
-                      )
-                      .join("")}
+        )
+        .join("")}
                   </div>
                 </section>
               `
-              : ""
-          }
-          ${
-            state.profile.topics?.length
-              ? `
+      : ""
+    }
+          ${state.profile.topics?.length
+      ? `
                 <section class="panel inset-panel" data-motion="rise">
                   ${createSectionTitle("Topics")}
                   <div class="topic-list">
@@ -604,8 +623,8 @@ function renderAboutView() {
                   </div>
                 </section>
               `
-              : ""
-          }
+      : ""
+    }
         </aside>
       </section>
       <section class="panel" data-motion="rise">
@@ -644,11 +663,10 @@ function renderPostsView(route) {
       ${renderPageIntro("Writing", title, summary)}
       <section class="panel" data-motion="rise">
         <div class="post-list listing">
-          ${
-            posts.length
-              ? posts.map(renderPostCard).join("")
-              : `<p class="empty-state">${state.uiLabels.empty_post_search || "No matching posts found."}</p>`
-          }
+          ${posts.length
+      ? posts.map(renderPostCard).join("")
+      : `<p class="empty-state">${state.uiLabels.empty_post_search || "No matching posts found."}</p>`
+    }
         </div>
       </section>
     </section>
@@ -674,7 +692,7 @@ function renderPostDetailView(post) {
         <span>${post.reading_time || state.uiLabels.post_reading_time_fallback || ""}</span>
       </div>
       ${post.tags?.length ? `<div class="topic-list" data-motion="rise">${renderTagList(post.tags)}</div>` : ""}
-      <section class="panel detail-card" data-motion="rise">
+      <section data-motion="rise">
         <div class="rich-text article-body">${post.html || ""}</div>
       </section>
     </article>
@@ -708,7 +726,7 @@ function renderProjectDetailView(project) {
       <a class="back-link" href="#/projects" data-motion="rise">← Back to projects</a>
       ${renderPageIntro("Projects", project.title || "", project.summary || "")}
       ${project.image ? `<img class="detail-image" data-motion="rise" src="${project.image}" alt="${project.image_alt || project.title || ""}" />` : ""}
-      <section class="panel detail-card" data-motion="rise">
+      <section data-motion="rise">
         <div class="rich-text article-body">${project.html || ""}</div>
       </section>
     </article>
@@ -802,7 +820,7 @@ function resetTilt(element) {
 }
 
 function initializeInteractiveMotion() {
-  const interactiveSelector = ".hero-shell, .card-link, .pill-link, .topic-chip, .contact-item, .theme-toggle";
+  const interactiveSelector = ".hero-shell, .card-link, .pill-link, .topic-chip, .contact-item, .search-submit, .theme-toggle";
 
   document.addEventListener(
     "pointermove",
@@ -854,8 +872,43 @@ function initializeTopbarMotion() {
   window.addEventListener("scroll", syncTopbar, { passive: true });
 }
 
+function initializeProfileMedia() {
+  document.querySelectorAll("[data-profile-media]").forEach((container) => {
+    const photo = container.querySelector(".profile-media-photo");
+    if (!photo) {
+      container.classList.add("is-loaded");
+      return;
+    }
+
+    const markLoaded = () => {
+      container.classList.remove("has-error");
+      container.classList.add("is-loaded");
+    };
+    const markError = () => {
+      container.classList.remove("is-loaded");
+      container.classList.add("has-error");
+    };
+
+    if (photo.complete) {
+      if (photo.naturalWidth > 0) {
+        markLoaded();
+      } else {
+        markError();
+      }
+      return;
+    }
+
+    if (photo.dataset.profileMediaBound === "true") return;
+    photo.dataset.profileMediaBound = "true";
+
+    photo.addEventListener("load", markLoaded, { once: true });
+    photo.addEventListener("error", markError, { once: true });
+  });
+}
+
 function renderRoute() {
   const route = getRouteFromHash();
+  state.searchQuery = route.search.get("q") || "";
   renderUi(state.site, state.ui);
   renderNav(state.site, route.name);
 
@@ -865,12 +918,14 @@ function renderRoute() {
   if (route.name === "about") {
     app.innerHTML = renderAboutView();
     initializePageMotion();
+    initializeProfileMedia();
     return;
   }
 
   if (route.name === "posts") {
     app.innerHTML = renderPostsView(route);
     initializePageMotion();
+    initializeProfileMedia();
     return;
   }
 
@@ -878,12 +933,14 @@ function renderRoute() {
     const post = state.posts.find((entry) => entry.slug === route.params.slug);
     app.innerHTML = renderPostDetailView(post);
     initializePageMotion();
+    initializeProfileMedia();
     return;
   }
 
   if (route.name === "projects") {
     app.innerHTML = renderProjectsView();
     initializePageMotion();
+    initializeProfileMedia();
     return;
   }
 
@@ -891,11 +948,13 @@ function renderRoute() {
     const project = state.projects.find((entry) => entry.slug === route.params.slug);
     app.innerHTML = renderProjectDetailView(project);
     initializePageMotion();
+    initializeProfileMedia();
     return;
   }
 
   app.innerHTML = renderHomeView();
   initializePageMotion();
+  initializeProfileMedia();
 }
 
 function initializeThemeToggle() {
@@ -912,9 +971,18 @@ function initializeThemeToggle() {
 
 function initializeSearch() {
   const search = document.querySelector("#post-search");
+  const form = document.querySelector("#search-form");
+  if (!search || !form) return;
+
   search.addEventListener("input", (event) => {
     state.searchQuery = event.target.value;
-    renderRoute();
+  });
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const nextQuery = search.value || "";
+    state.searchQuery = nextQuery;
+    window.location.hash = getSearchRoute(nextQuery).replace(/^#/, "");
   });
 }
 
