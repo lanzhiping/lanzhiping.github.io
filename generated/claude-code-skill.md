@@ -23,6 +23,7 @@ My expertise spans AWS Cloud, CI/CD pipelines, React and TypeScript ecosystems, 
 
 ## Recent Blogs
 
+- AI-First UI Components (2026-03-23): Inspiring AI-First UI components, empowered traditional UI with AI capabilities
 - Building a Shared Charting Library Across Multiple Expedia Teams (2025-07-08): How a reusable charting library reduced duplication, standardized data visualization, and improved delivery speed across internal teams.
 - Leading Frontend Architecture for a Rate Automation System (2025-06-28): A draft write-up on leading frontend architecture for a large product initiative in Expedia PartnerCentral.
 - Shared UI Platform and Internal NPM Package (2025-06-28): Integrated a new UI toolkit into legacy systems through a reusable internal NPM package, improving consistency and easing adoption across teams.

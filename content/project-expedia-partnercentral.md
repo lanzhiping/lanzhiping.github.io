@@ -1,9 +1,11 @@
 ---
 type: project
 title: "Expedia PartnerCentral"
-status: "Delivered"
+image: "./assets/project-expedia-partner-central.jpg"
 summary: "Worked on Expedia PartnerCentral, a property management platform serving Expedia's global hotel partners, with contributions spanning dashboards, rate automation, competitiveness tooling, and platform migration work."
 ---
+
+## PartnerCentral
 
 Expedia PartnerCentral is the strongest example of my recent work at scale. I contributed as both an individual engineer and a technical lead, partnering with PMs and UX designers, mentoring junior developers, helping shape architecture, and supporting team delivery processes.
 

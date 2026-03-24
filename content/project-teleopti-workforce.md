@@ -1,7 +1,7 @@
 ---
 type: project
 title: "Teleopti Workforce Scheduling Tools"
-status: "Delivered"
+image: "./assets/project-teleopti-workforce.jpg"
 summary: "Built enterprise scheduling tools at Teleopti, including seat planning and automated shift scheduling systems."
 ---
 
