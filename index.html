@@ -37,10 +37,13 @@
           <a class="brand" href="#top" id="site-title">Loading...</a>
         </div>
         <div class="toolbar">
-          <label class="searchbox" for="post-search">
-            <span class="searchbox-icon">⌕</span>
-            <input id="post-search" type="search" placeholder="" />
-          </label>
+          <form class="search-form" id="search-form" role="search">
+            <label class="searchbox" for="post-search">
+              <span class="searchbox-icon">⌕</span>
+              <input id="post-search" type="search" placeholder="" />
+            </label>
+            <button class="search-submit" id="search-submit" type="submit">Search</button>
+          </form>
           <button
             class="theme-toggle"
             id="theme-toggle"
@@ -48,6 +51,8 @@
             aria-label=""
             title=""
           >
+            <span class="theme-toggle-icon theme-toggle-icon-light" aria-hidden="true">☀</span>
+            <span class="theme-toggle-icon theme-toggle-icon-dark" aria-hidden="true">☾</span>
             <span class="theme-toggle-light"></span>
             <span class="theme-toggle-dark"></span>
           </button>
