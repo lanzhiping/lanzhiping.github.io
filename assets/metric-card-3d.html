@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>3D Metric Card Explode Animation</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: transparent; overflow: hidden; width: 100vw; height: 100vh; }
+  canvas { display: block; }
+</style>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ============================================================
+// Spring solver
+// ============================================================
+function spring(t, tension = 180, friction = 14) {
+  const omega = Math.sqrt(tension);
+  const zeta = friction / (2 * Math.sqrt(tension));
+  if (zeta < 1) {
+    const omega_d = omega * Math.sqrt(1 - zeta * zeta);
+    return 1 - Math.exp(-zeta * omega * t) *
+      (Math.cos(omega_d * t) + (zeta / Math.sqrt(1 - zeta * zeta)) * Math.sin(omega_d * t));
+  }
+  return 1 - (1 + omega * t) * Math.exp(-omega * t);
+}
+
+// ============================================================
+// Canvas constants
+// ============================================================
+const CW = 800, CH = 680; // 2x for retina
+const PADDING = 48;        // 24 * 2
+const CARD_W = 400, CARD_H = 340;
+const FONT_FAMILY = '"Centra No2", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif';
+
+// Chart coordinate helpers
+// Original SVG space is roughly 1200 wide; chart area within padded card
+const CHART_LEFT = PADDING + 8;
+const CHART_RIGHT = CW - PADDING - 8;
+const CHART_WIDTH = CHART_RIGHT - CHART_LEFT;
+const CHART_TOP = 290;   // where chart area begins (2x)
+const CHART_BOTTOM = CH - 100; // leave room for labels
+const CHART_HEIGHT = CHART_BOTTOM - CHART_TOP;
+
+// Original SVG points
+const grayOrig = [
+  [1, 34.93], [200.67, 30.37], [400.33, 35.59],
+  [600, 28.35], [799.67, 41.62], [999.33, 16.64], [1199, 26.42]
+];
+const blueOrig = [
+  [1, 94.40], [200.67, 100.98], [400.33, 79.54],
+  [600, 65.68], [799.67, 70.24], [999.33, 42.68], [1199, 29.39]
+];
+
+// Scale points to canvas coordinates
+function scalePoints(orig) {
+  // x: map [1..1199] -> [CHART_LEFT..CHART_RIGHT]
+  // y: map [0..~110] -> [CHART_TOP..CHART_BOTTOM] (inverted: lower value = higher on screen)
+  const yMin = 0, yMax = 110;
+  return orig.map(([x, y]) => {
+    const sx = CHART_LEFT + ((x - 1) / (1199 - 1)) * CHART_WIDTH;
+    const sy = CHART_TOP + ((y - yMin) / (yMax - yMin)) * CHART_HEIGHT;
+    return [sx, sy];
+  });
+}
+
+const grayPts = scalePoints(grayOrig);
+const bluePts = scalePoints(blueOrig);
+
+// ============================================================
+// Layer rendering functions
+// ============================================================
+function createCanvas() {
+  const c = document.createElement('canvas');
+  c.width = CW; c.height = CH;
+  return c;
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.lineTo(x + w - r, y);
+  ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+  ctx.lineTo(x + w, y + h - r);
+  ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+  ctx.lineTo(x + r, y + h);
+  ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+  ctx.lineTo(x, y + r);
+  ctx.quadraticCurveTo(x, y, x + r, y);
+  ctx.closePath();
+}
+
+// Layer 0: Card background
+function renderLayer0() {
+  const c = createCanvas();
+  const ctx = c.getContext('2d');
+  ctx.clearRect(0, 0, CW, CH);
+
+  // Shadow
+  ctx.shadowColor = 'rgba(0,0,0,0.12)';
+  ctx.shadowBlur = 20;
+  ctx.shadowOffsetX = 0;
+  ctx.shadowOffsetY = 4;
+
+  // White rounded rect
+  roundRect(ctx, 4, 4, CW - 8, CH - 8, 24);
+  ctx.fillStyle = '#ffffff';
+  ctx.fill();
+
+  // Border
+  ctx.shadowColor = 'transparent';
+  roundRect(ctx, 4, 4, CW - 8, CH - 8, 24);
+  ctx.strokeStyle = '#e0e0e0';
+  ctx.lineWidth = 2;
+  ctx.stroke();
+
+  return c;
+}
+
+// Clip helper — clips to card rounded rect
+function clipToCard(ctx) {
+  roundRect(ctx, 4, 4, CW - 8, CH - 8, 24);
+  ctx.clip();
+}
+
+// Layer 1: Header text
+function renderLayer1() {
+  const c = createCanvas();
+  const ctx = c.getContext('2d');
+  ctx.clearRect(0, 0, CW, CH);
+  ctx.save();
+  clipToCard(ctx);
+
+  // "Revenue" top-left
+  ctx.font = `400 32px ${FONT_FAMILY}`;
+  ctx.fillStyle = '#1a1a2e';
+  ctx.textBaseline = 'top';
+  ctx.fillText('Revenue', PADDING, PADDING);
+
+  // Chevron top-right
+  ctx.font = `400 36px ${FONT_FAMILY}`;
+  ctx.fillStyle = '#676A7D';
+  ctx.textAlign = 'right';
+  ctx.fillText('\u203A', CW - PADDING, PADDING - 4);
+  ctx.textAlign = 'left';
+
+  ctx.restore();
+  return c;
+}
+
+// Layer 2: Amount + change
+function renderLayer2() {
+  const c = createCanvas();
+  const ctx = c.getContext('2d');
+  ctx.clearRect(0, 0, CW, CH);
+  ctx.save();
+  clipToCard(ctx);
+
+  const yBase = PADDING + 70;
+
+  // "$253,811"
+  ctx.font = `500 64px ${FONT_FAMILY}`;
+  ctx.fillStyle = '#1a1a2e';
+  ctx.textBaseline = 'top';
+  ctx.fillText('$253,811', PADDING, yBase);
+
+  // Measure width of amount
+  const amtW = ctx.measureText('$253,811').width;
+
+  // "-40%"
+  ctx.font = `400 32px ${FONT_FAMILY}`;
+  ctx.fillStyle = '#d32f2f';
+  ctx.fillText(' -40%', PADDING + amtW + 8, yBase + 18);
+
+  // "Last year: $421,926"
+  ctx.font = `400 28px ${FONT_FAMILY}`;
+  ctx.fillStyle = '#676A7D';
+  ctx.fillText('Last year: $421,926', PADDING, yBase + 76);
+
+  ctx.restore();
+  return c;
+}
+
+// Layer 3: Chart lines + gradient fill + labels
+function renderLayer3() {
+  const c = createCanvas();
+  const ctx = c.getContext('2d');
+  ctx.clearRect(0, 0, CW, CH);
+  ctx.save();
+  clipToCard(ctx);
+
+  // Draw straight line helper
+  function drawLine(pts, color, width) {
+    ctx.beginPath();
+    ctx.moveTo(pts[0][0], pts[0][1]);
+    for (let i = 1; i < pts.length; i++) {
+      ctx.lineTo(pts[i][0], pts[i][1]);
+    }
+    ctx.strokeStyle = color;
+    ctx.lineWidth = width;
+    ctx.lineJoin = 'bevel';
+    ctx.stroke();
+  }
+
+  // Blue gradient fill under blue line
+  ctx.beginPath();
+  ctx.moveTo(bluePts[0][0], bluePts[0][1]);
+  for (let i = 1; i < bluePts.length; i++) {
+    ctx.lineTo(bluePts[i][0], bluePts[i][1]);
+  }
+  ctx.lineTo(bluePts[bluePts.length - 1][0], CHART_BOTTOM);
+  ctx.lineTo(bluePts[0][0], CHART_BOTTOM);
+  ctx.closePath();
+  const grad = ctx.createLinearGradient(0, CHART_TOP, 0, CHART_BOTTOM);
+  grad.addColorStop(0, 'rgba(32,35,193,0.15)');
+  grad.addColorStop(1, 'rgba(32,35,193,0)');
+  ctx.fillStyle = grad;
+  ctx.fill();
+
+  // Gray line
+  drawLine(grayPts, '#818494', 3);
+  // Blue line
+  drawLine(bluePts, '#2023C1', 3);
+
+  // Labels (on same layer as lines)
+  ctx.font = `400 24px ${FONT_FAMILY}`;
+  ctx.fillStyle = '#676A7D';
+  ctx.textBaseline = 'top';
+
+  // Bottom labels
+  ctx.textAlign = 'left';
+  ctx.fillText('Mar 30', CHART_LEFT, CHART_BOTTOM + 16);
+  ctx.textAlign = 'right';
+  ctx.fillText('Apr 5', CHART_RIGHT, CHART_BOTTOM + 16);
+
+  // "16.3K" below 2nd blue dot
+  const b1 = bluePts[1];
+  ctx.textAlign = 'center';
+  ctx.fillText('16.3K', b1[0], b1[1] + 14);
+
+  // "61K" above-left of last gray dot
+  const gLast = grayPts[grayPts.length - 1];
+  ctx.textAlign = 'right';
+  ctx.fillText('61K', gLast[0] - 10, gLast[1] - 30);
+
+  ctx.restore();
+  return c;
+}
+
+// ============================================================
+// Three.js Scene
+// ============================================================
+const scene = new THREE.Scene();
+scene.background = null;
+
+const aspect = window.innerWidth / window.innerHeight;
+const camera = new THREE.PerspectiveCamera(35, aspect, 0.1, 100);
+camera.position.set(0, 0, 6.5);
+camera.lookAt(0, 0, 0);
+
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.shadowMap.enabled = true;
+document.body.appendChild(renderer.domElement);
+
+// Lights — bright enough to keep white card truly white
+const ambient = new THREE.AmbientLight(0xffffff, 1.0);
+scene.add(ambient);
+
+const dirLight = new THREE.DirectionalLight(0xffffff, 0.4);
+dirLight.position.set(5, 8, 5);
+dirLight.castShadow = true;
+scene.add(dirLight);
+
+// Render layers to textures (4 layers: background, header, amount, chart+labels)
+const layerCanvases = [
+  renderLayer0(), renderLayer1(), renderLayer2(), renderLayer3()
+];
+
+// Card dimensions in world units
+const cardWorldW = 2.8;
+const cardWorldH = cardWorldW * (CH / CW);
+
+// Create meshes
+const cardGroup = new THREE.Group();
+const layerMeshes = [];
+
+layerCanvases.forEach((canvas, i) => {
+  const texture = new THREE.CanvasTexture(canvas);
+  texture.minFilter = THREE.LinearFilter;
+  texture.magFilter = THREE.LinearFilter;
+
+  const geo = new THREE.PlaneGeometry(cardWorldW, cardWorldH);
+  // Layer 0 (background) uses StandardMaterial for lighting; others use BasicMaterial for clean transparency
+  const mat = i === 0
+    ? new THREE.MeshStandardMaterial({
+        map: texture,
+        side: THREE.DoubleSide,
+        roughness: 0.9,
+        metalness: 0.0,
+      })
+    : new THREE.MeshBasicMaterial({
+        map: texture,
+        transparent: true,
+        side: THREE.DoubleSide,
+        depthWrite: false,
+        alphaTest: 0.01,
+      });
+
+  const mesh = new THREE.Mesh(geo, mat);
+  mesh.position.z = i * 0.04;
+  if (i === 0) {
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+  }
+
+  cardGroup.add(mesh);
+  layerMeshes.push(mesh);
+});
+
+scene.add(cardGroup);
+
+// ============================================================
+// Animation (locked values: Y=16°, X=-5°, gap=0.25, zoom=6.5)
+// ============================================================
+const CYCLE = 5.0;
+const TARGET_Y = 16 * Math.PI / 180;
+const TARGET_X = -5 * Math.PI / 180;
+const LAYER_GAP = 0.25;
+
+function getAnimState(time) {
+  const t = time % CYCLE;
+
+  let rotY = 0, rotX = 0;
+  if (t < 0.8) {
+    const p = spring(t / 0.8);
+    rotY = p * TARGET_Y;
+    rotX = p * TARGET_X;
+  } else if (t < 3.5) {
+    rotY = TARGET_Y;
+    rotX = TARGET_X;
+  } else if (t < 4.5) {
+    const p = 1 - spring((t - 3.5) / 1.0);
+    rotY = p * TARGET_Y;
+    rotX = p * TARGET_X;
+  }
+
+  const layerZ = [];
+  const STAGGER = 0.1;
+  for (let i = 0; i < 4; i++) {
+    const baseZ = i * 0.04;
+    const target = i * LAYER_GAP;
+    let progress = 0;
+
+    const explodeStart = 0.6 + i * STAGGER;
+    const explodeEnd = explodeStart + 0.6;
+    const reverseStart = 3.5 + i * STAGGER;
+    const reverseEnd = reverseStart + 0.6;
+
+    if (t < explodeStart) progress = 0;
+    else if (t < explodeEnd) progress = spring((t - explodeStart) / 0.6);
+    else if (t < reverseStart) progress = 1;
+    else if (t < reverseEnd) progress = 1 - spring((t - reverseStart) / 0.6);
+    else progress = 0;
+
+    layerZ.push(baseZ + target * progress);
+  }
+
+  return { rotY, rotX, layerZ };
+}
+
+function animate() {
+  requestAnimationFrame(animate);
+  const state = getAnimState(performance.now() / 1000);
+  cardGroup.rotation.y = state.rotY;
+  cardGroup.rotation.x = state.rotX;
+  for (let i = 0; i < layerMeshes.length; i++) {
+    layerMeshes[i].position.z = state.layerZ[i];
+  }
+  renderer.render(scene, camera);
+}
+
+animate();
+
+// Handle resize
+window.addEventListener('resize', () => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize(window.innerWidth, window.innerHeight);
+});
+</script>
+</body>
+</html>
