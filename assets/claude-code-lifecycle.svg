@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" font-family="-apple-system, SF Pro Display, Helvetica, Arial, sans-serif">
+  <defs>
+    <!-- arrow markers -->
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#333"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2563eb"/>
+    </marker>
+    <marker id="arrow-purple" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#059669"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#ea580c"/>
+    </marker>
+
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fafafa"/>
+      <stop offset="100%" stop-color="#f0f0f5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- background -->
+  <rect width="1600" height="1200" fill="url(#bgGrad)"/>
+
+  <!-- Title -->
+  <text x="800" y="42" font-size="28" font-weight="700" text-anchor="middle" fill="#111">Claude Code — LLM Agent Lifecycle</text>
+  <text x="800" y="66" font-size="14" text-anchor="middle" fill="#666">Bootstrap · Turn loop · Thinking · Tools · Sub-agents · Resume · Opus strategies</text>
+
+  <!-- ============ PHASE 1: BOOTSTRAP ============ -->
+  <g>
+    <rect x="40" y="90" width="380" height="260" rx="12" fill="#fff" stroke="#d4d4d8" stroke-width="1.5"/>
+    <rect x="40" y="90" width="380" height="32" rx="12" fill="#1f2937"/>
+    <text x="56" y="112" font-size="14" font-weight="700" fill="#fff">① SESSION BOOTSTRAP (cold start)</text>
+
+    <text x="60" y="148" font-size="12" font-weight="600" fill="#111">CLI side — before first API call</text>
+
+    <rect x="60" y="160" width="160" height="34" rx="6" fill="#eef2ff" stroke="#6366f1"/>
+    <text x="140" y="181" font-size="11" text-anchor="middle" fill="#111">Load CLAUDE.md (tree)</text>
+
+    <rect x="232" y="160" width="170" height="34" rx="6" fill="#eef2ff" stroke="#6366f1"/>
+    <text x="317" y="181" font-size="11" text-anchor="middle" fill="#111">Register plugins / skills</text>
+
+    <rect x="60" y="202" width="160" height="34" rx="6" fill="#eef2ff" stroke="#6366f1"/>
+    <text x="140" y="223" font-size="11" text-anchor="middle" fill="#111">MCP server handshakes</text>
+
+    <rect x="232" y="202" width="170" height="34" rx="6" fill="#eef2ff" stroke="#6366f1"/>
+    <text x="317" y="223" font-size="11" text-anchor="middle" fill="#111">Build tool schemas</text>
+
+    <rect x="60" y="244" width="342" height="34" rx="6" fill="#eef2ff" stroke="#6366f1"/>
+    <text x="231" y="265" font-size="11" text-anchor="middle" fill="#111">Resolve hooks · env · permission policies · settings.json</text>
+
+    <rect x="60" y="286" width="342" height="48" rx="6" fill="#fef3c7" stroke="#d97706"/>
+    <text x="231" y="305" font-size="11" font-weight="600" text-anchor="middle" fill="#7c2d12">Assemble system prompt</text>
+    <text x="231" y="321" font-size="10" text-anchor="middle" fill="#92400e">instructions + tools + CLAUDE.md + skills index (~10–30k tok)</text>
+  </g>
+
+  <!-- arrow bootstrap -> turn loop -->
+  <path d="M 420 220 L 470 220" stroke="#333" stroke-width="2" fill="none" marker-end="url(#arrow)"/>
+
+  <!-- ============ PHASE 2: TURN LOOP ============ -->
+  <g>
+    <rect x="470" y="90" width="700" height="500" rx="12" fill="#fff" stroke="#d4d4d8" stroke-width="1.5"/>
+    <rect x="470" y="90" width="700" height="32" rx="12" fill="#2563eb"/>
+    <text x="486" y="112" font-size="14" font-weight="700" fill="#fff">② TURN LOOP (agentic inner loop)</text>
+
+    <!-- User input -->
+    <rect x="496" y="142" width="140" height="44" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="566" y="162" font-size="12" font-weight="600" text-anchor="middle" fill="#1e3a8a">User message</text>
+    <text x="566" y="177" font-size="10" text-anchor="middle" fill="#1e40af">+ system-reminders</text>
+
+    <!-- Context assembly -->
+    <rect x="680" y="142" width="170" height="44" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="765" y="162" font-size="12" font-weight="600" text-anchor="middle" fill="#1e3a8a">Assemble request</text>
+    <text x="765" y="177" font-size="10" text-anchor="middle" fill="#1e40af">system + memory + transcript</text>
+
+    <!-- API send -->
+    <rect x="894" y="142" width="140" height="44" rx="8" fill="#dbeafe" stroke="#2563eb" stroke-width="1.5"/>
+    <text x="964" y="162" font-size="12" font-weight="600" text-anchor="middle" fill="#1e3a8a">POST /messages</text>
+    <text x="964" y="177" font-size="10" text-anchor="middle" fill="#1e40af">streaming SSE</text>
+
+    <path d="M 636 164 L 680 164" stroke="#2563eb" stroke-width="1.5" fill="none" marker-end="url(#arrow-blue)"/>
+    <path d="M 850 164 L 894 164" stroke="#2563eb" stroke-width="1.5" fill="none" marker-end="url(#arrow-blue)"/>
+
+    <!-- Inference phases -->
+    <rect x="496" y="208" width="650" height="150" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="1.5"/>
+    <text x="510" y="228" font-size="12" font-weight="700" fill="#5b21b6">Inside the model (server-side)</text>
+
+    <!-- Prefill -->
+    <rect x="510" y="240" width="190" height="100" rx="8" fill="#fff" stroke="#7c3aed"/>
+    <text x="605" y="260" font-size="12" font-weight="700" text-anchor="middle" fill="#5b21b6">PREFILL</text>
+    <text x="605" y="278" font-size="10" text-anchor="middle" fill="#374151">process input tokens</text>
+    <text x="605" y="293" font-size="10" text-anchor="middle" fill="#374151">compute-bound · parallel</text>
+    <text x="605" y="313" font-size="10" font-weight="600" text-anchor="middle" fill="#059669">Turn 1: cache MISS</text>
+    <text x="605" y="328" font-size="10" font-weight="600" text-anchor="middle" fill="#059669">Turn 2+: cache HIT (~10%)</text>
+
+    <!-- Thinking -->
+    <rect x="714" y="240" width="190" height="100" rx="8" fill="#fff" stroke="#7c3aed"/>
+    <text x="809" y="260" font-size="12" font-weight="700" text-anchor="middle" fill="#5b21b6">EXTENDED THINKING</text>
+    <text x="809" y="278" font-size="10" text-anchor="middle" fill="#374151">reasoning tokens (hidden)</text>
+    <text x="809" y="293" font-size="10" text-anchor="middle" fill="#374151">plan · self-critique · branch</text>
+    <text x="809" y="313" font-size="10" font-weight="600" text-anchor="middle" fill="#ea580c">Opus: deeper budget</text>
+    <text x="809" y="328" font-size="10" text-anchor="middle" fill="#374151">interleaved with tool calls</text>
+
+    <!-- Decode -->
+    <rect x="918" y="240" width="215" height="100" rx="8" fill="#fff" stroke="#7c3aed"/>
+    <text x="1025" y="260" font-size="12" font-weight="700" text-anchor="middle" fill="#5b21b6">DECODE (stream)</text>
+    <text x="1025" y="278" font-size="10" text-anchor="middle" fill="#374151">1 token at a time · autoreg.</text>
+    <text x="1025" y="293" font-size="10" text-anchor="middle" fill="#374151">memory-bandwidth bound</text>
+    <text x="1025" y="313" font-size="10" font-weight="600" text-anchor="middle" fill="#059669">text + tool_use blocks</text>
+    <text x="1025" y="328" font-size="10" text-anchor="middle" fill="#374151">TTFT felt by user here</text>
+
+    <path d="M 700 290 L 714 290" stroke="#7c3aed" stroke-width="1.5" fill="none" marker-end="url(#arrow-purple)"/>
+    <path d="M 904 290 L 918 290" stroke="#7c3aed" stroke-width="1.5" fill="none" marker-end="url(#arrow-purple)"/>
+
+    <!-- Parse -->
+    <path d="M 964 358 L 964 380" stroke="#2563eb" stroke-width="1.5" fill="none" marker-end="url(#arrow-blue)"/>
+    <rect x="870" y="380" width="188" height="36" rx="6" fill="#dbeafe" stroke="#2563eb"/>
+    <text x="964" y="403" font-size="11" font-weight="600" text-anchor="middle" fill="#1e3a8a">Parse: stop_reason?</text>
+
+    <!-- Decision diamond -->
+    <path d="M 964 416 L 1050 450 L 964 484 L 878 450 z" fill="#fef3c7" stroke="#d97706" stroke-width="1.5"/>
+    <text x="964" y="448" font-size="11" font-weight="700" text-anchor="middle" fill="#7c2d12">tool_use</text>
+    <text x="964" y="462" font-size="11" font-weight="700" text-anchor="middle" fill="#7c2d12">present?</text>
+
+    <!-- No: end turn -->
+    <path d="M 1050 450 L 1120 450" stroke="#059669" stroke-width="1.5" fill="none" marker-end="url(#arrow-green)"/>
+    <text x="1085" y="443" font-size="10" font-weight="600" fill="#059669">no</text>
+    <rect x="1120" y="428" width="36" height="46" rx="8" fill="#d1fae5" stroke="#059669"/>
+    <text x="1138" y="447" font-size="10" font-weight="700" text-anchor="middle" fill="#065f46">end</text>
+    <text x="1138" y="461" font-size="10" font-weight="700" text-anchor="middle" fill="#065f46">turn</text>
+
+    <!-- Yes: execute tools -->
+    <path d="M 878 450 L 800 450" stroke="#ea580c" stroke-width="1.5" fill="none" marker-end="url(#arrow-orange)"/>
+    <text x="836" y="443" font-size="10" font-weight="600" fill="#ea580c">yes</text>
+
+    <!-- Tool execution -->
+    <rect x="496" y="428" width="300" height="104" rx="8" fill="#fff7ed" stroke="#ea580c" stroke-width="1.5"/>
+    <text x="646" y="448" font-size="12" font-weight="700" text-anchor="middle" fill="#7c2d12">Execute tools (client-side)</text>
+    <text x="646" y="466" font-size="10" text-anchor="middle" fill="#431407">permission check → run → capture result</text>
+    <rect x="510" y="476" width="130" height="22" rx="4" fill="#fff" stroke="#ea580c"/>
+    <text x="575" y="491" font-size="10" text-anchor="middle" fill="#7c2d12">Read / Edit / Bash</text>
+    <rect x="650" y="476" width="130" height="22" rx="4" fill="#fff" stroke="#ea580c"/>
+    <text x="715" y="491" font-size="10" text-anchor="middle" fill="#7c2d12">Grep / Glob / MCP</text>
+    <rect x="510" y="502" width="270" height="22" rx="4" fill="#ffedd5" stroke="#ea580c"/>
+    <text x="645" y="517" font-size="10" font-weight="600" text-anchor="middle" fill="#7c2d12">Parallel execution when independent</text>
+
+    <!-- Feed back arrow (loop) -->
+    <path d="M 496 480 C 430 480 430 164 496 164" stroke="#ea580c" stroke-width="1.5" fill="none" stroke-dasharray="5,3" marker-end="url(#arrow-orange)"/>
+    <text x="410" y="325" font-size="10" font-weight="600" fill="#ea580c" transform="rotate(-90 410 325)">tool_result → next turn</text>
+
+    <!-- Legend / notes -->
+    <text x="510" y="556" font-size="11" font-weight="600" fill="#111">Each loop iteration = one assistant message; loop ends when no tool_use.</text>
+    <text x="510" y="572" font-size="11" fill="#374151">Transcript (system + all turns) is re-sent every iteration; cache keeps prefix cheap.</text>
+  </g>
+
+  <!-- ============ PHASE 3: SUB-AGENT ============ -->
+  <g>
+    <rect x="1200" y="90" width="370" height="500" rx="12" fill="#fff" stroke="#d4d4d8" stroke-width="1.5"/>
+    <rect x="1200" y="90" width="370" height="32" rx="12" fill="#7c3aed"/>
+    <text x="1216" y="112" font-size="14" font-weight="700" fill="#fff">③ SUB-AGENT (Task tool)</text>
+
+    <rect x="1220" y="142" width="330" height="44" rx="8" fill="#f5f3ff" stroke="#7c3aed"/>
+    <text x="1385" y="162" font-size="12" font-weight="600" text-anchor="middle" fill="#5b21b6">Parent: Task(subagent_type, prompt)</text>
+    <text x="1385" y="177" font-size="10" text-anchor="middle" fill="#6b21a8">delegates scoped work</text>
+
+    <path d="M 1385 188 L 1385 210" stroke="#7c3aed" stroke-width="1.5" fill="none" marker-end="url(#arrow-purple)"/>
+
+    <rect x="1220" y="212" width="330" height="210" rx="8" fill="#faf5ff" stroke="#7c3aed" stroke-width="1.5" stroke-dasharray="4,2"/>
+    <text x="1385" y="232" font-size="12" font-weight="700" text-anchor="middle" fill="#5b21b6">Isolated context window</text>
+    <text x="1385" y="248" font-size="10" text-anchor="middle" fill="#6b21a8">own system prompt · own tool set · own memory</text>
+
+    <rect x="1240" y="262" width="290" height="30" rx="6" fill="#fff" stroke="#7c3aed"/>
+    <text x="1385" y="281" font-size="11" text-anchor="middle" fill="#111">runs its own TURN LOOP (prefill→think→decode→tools)</text>
+
+    <rect x="1240" y="300" width="290" height="30" rx="6" fill="#fff" stroke="#7c3aed"/>
+    <text x="1385" y="319" font-size="11" text-anchor="middle" fill="#111">may spawn its own sub-agents (tree of work)</text>
+
+    <rect x="1240" y="338" width="290" height="30" rx="6" fill="#fff" stroke="#7c3aed"/>
+    <text x="1385" y="357" font-size="11" text-anchor="middle" fill="#111">optional git worktree isolation</text>
+
+    <rect x="1240" y="376" width="290" height="38" rx="6" fill="#ede9fe" stroke="#7c3aed"/>
+    <text x="1385" y="393" font-size="11" font-weight="600" text-anchor="middle" fill="#5b21b6">Returns ONE summary message</text>
+    <text x="1385" y="407" font-size="10" text-anchor="middle" fill="#6b21a8">intermediate tokens never pollute parent context</text>
+
+    <path d="M 1385 422 L 1385 444" stroke="#7c3aed" stroke-width="1.5" fill="none" marker-end="url(#arrow-purple)"/>
+
+    <rect x="1220" y="446" width="330" height="44" rx="8" fill="#f5f3ff" stroke="#7c3aed"/>
+    <text x="1385" y="466" font-size="12" font-weight="600" text-anchor="middle" fill="#5b21b6">Parent resumes its turn loop</text>
+    <text x="1385" y="481" font-size="10" text-anchor="middle" fill="#6b21a8">treats summary as tool_result</text>
+
+    <text x="1220" y="516" font-size="11" font-weight="700" fill="#111">Why delegate:</text>
+    <text x="1220" y="532" font-size="10" fill="#374151">• protect main context from large search output</text>
+    <text x="1220" y="547" font-size="10" fill="#374151">• run N independent queries in parallel (fan-out)</text>
+    <text x="1220" y="562" font-size="10" fill="#374151">• route to cheaper/faster model (Haiku) for narrow work</text>
+    <text x="1220" y="577" font-size="10" fill="#374151">• specialized system prompt per role (reviewer, planner)</text>
+
+    <!-- dotted link from main loop -->
+    <path d="M 1170 330 C 1185 330 1185 240 1200 240" stroke="#7c3aed" stroke-width="1.5" fill="none" stroke-dasharray="3,3" marker-end="url(#arrow-purple)"/>
+  </g>
+
+  <!-- ============ PHASE 4: MULTI-TURN + CACHE ============ -->
+  <g>
+    <rect x="40" y="620" width="750" height="240" rx="12" fill="#fff" stroke="#d4d4d8" stroke-width="1.5"/>
+    <rect x="40" y="620" width="750" height="32" rx="12" fill="#059669"/>
+    <text x="56" y="642" font-size="14" font-weight="700" fill="#fff">④ MULTI-TURN · PROMPT CACHING</text>
+
+    <!-- Turn 1 -->
+    <rect x="60" y="670" width="210" height="170" rx="8" fill="#ecfdf5" stroke="#059669"/>
+    <text x="165" y="690" font-size="12" font-weight="700" text-anchor="middle" fill="#065f46">Turn 1 (cold)</text>
+    <rect x="72" y="700" width="186" height="20" rx="3" fill="#059669"/>
+    <text x="165" y="714" font-size="10" font-weight="600" text-anchor="middle" fill="#fff">system prompt (~20k tok)</text>
+    <rect x="72" y="722" width="186" height="16" rx="3" fill="#10b981"/>
+    <text x="165" y="734" font-size="9" text-anchor="middle" fill="#fff">user msg 1</text>
+    <rect x="72" y="740" width="186" height="16" rx="3" fill="#a7f3d0"/>
+    <text x="165" y="752" font-size="9" text-anchor="middle" fill="#064e3b">assistant 1</text>
+    <text x="165" y="778" font-size="10" font-weight="600" text-anchor="middle" fill="#7f1d1d">prefill ALL tokens</text>
+    <text x="165" y="792" font-size="10" text-anchor="middle" fill="#374151">high TTFT · cache WRITE</text>
+    <text x="165" y="812" font-size="10" text-anchor="middle" fill="#065f46">cache_creation=20k</text>
+    <text x="165" y="826" font-size="10" text-anchor="middle" fill="#065f46">cache_read=0</text>
+
+    <path d="M 270 755 L 300 755" stroke="#059669" stroke-width="2" fill="none" marker-end="url(#arrow-green)"/>
+
+    <!-- Turn 2 -->
+    <rect x="300" y="670" width="210" height="170" rx="8" fill="#ecfdf5" stroke="#059669"/>
+    <text x="405" y="690" font-size="12" font-weight="700" text-anchor="middle" fill="#065f46">Turn 2 (warm)</text>
+    <rect x="312" y="700" width="186" height="20" rx="3" fill="#d1fae5" stroke="#059669" stroke-dasharray="3,2"/>
+    <text x="405" y="714" font-size="10" text-anchor="middle" fill="#065f46">system (CACHED)</text>
+    <rect x="312" y="722" width="186" height="16" rx="3" fill="#d1fae5" stroke="#059669" stroke-dasharray="3,2"/>
+    <text x="405" y="734" font-size="9" text-anchor="middle" fill="#065f46">turn 1 (CACHED)</text>
+    <rect x="312" y="740" width="186" height="16" rx="3" fill="#10b981"/>
+    <text x="405" y="752" font-size="9" text-anchor="middle" fill="#fff">user msg 2 · assistant 2</text>
+    <text x="405" y="778" font-size="10" font-weight="600" text-anchor="middle" fill="#065f46">prefill only the delta</text>
+    <text x="405" y="792" font-size="10" text-anchor="middle" fill="#374151">~10% cost · ~10% latency</text>
+    <text x="405" y="812" font-size="10" text-anchor="middle" fill="#065f46">cache_read=20k</text>
+    <text x="405" y="826" font-size="10" text-anchor="middle" fill="#065f46">cache_creation=~1k</text>
+
+    <path d="M 510 755 L 540 755" stroke="#059669" stroke-width="2" fill="none" marker-end="url(#arrow-green)"/>
+
+    <!-- Turn N -->
+    <rect x="540" y="670" width="230" height="170" rx="8" fill="#ecfdf5" stroke="#059669"/>
+    <text x="655" y="690" font-size="12" font-weight="700" text-anchor="middle" fill="#065f46">Turn N · auto-compaction</text>
+    <text x="655" y="712" font-size="10" text-anchor="middle" fill="#374151">when transcript grows past limit:</text>
+    <rect x="552" y="720" width="206" height="18" rx="3" fill="#fef3c7" stroke="#d97706"/>
+    <text x="655" y="733" font-size="10" text-anchor="middle" fill="#7c2d12">summarize old turns</text>
+    <rect x="552" y="742" width="206" height="18" rx="3" fill="#d1fae5"/>
+    <text x="655" y="755" font-size="10" text-anchor="middle" fill="#065f46">keep recent turns verbatim</text>
+    <text x="655" y="780" font-size="10" text-anchor="middle" fill="#374151">cache prefix shifts →</text>
+    <text x="655" y="794" font-size="10" font-weight="600" text-anchor="middle" fill="#b91c1c">partial cache invalidation</text>
+    <text x="655" y="814" font-size="10" text-anchor="middle" fill="#374151">MEMORY.md preserved across</text>
+    <text x="655" y="828" font-size="10" text-anchor="middle" fill="#374151">compaction as durable state</text>
+  </g>
+
+  <!-- ============ PHASE 5: RESUME ============ -->
+  <g>
+    <rect x="810" y="620" width="400" height="240" rx="12" fill="#fff" stroke="#d4d4d8" stroke-width="1.5"/>
+    <rect x="810" y="620" width="400" height="32" rx="12" fill="#0891b2"/>
+    <text x="826" y="642" font-size="14" font-weight="700" fill="#fff">⑤ RESUME SESSION (claude --resume)</text>
+
+    <rect x="830" y="670" width="170" height="40" rx="6" fill="#ecfeff" stroke="#0891b2"/>
+    <text x="915" y="688" font-size="11" font-weight="600" text-anchor="middle" fill="#0e7490">On disk:</text>
+    <text x="915" y="702" font-size="10" text-anchor="middle" fill="#155e75">~/.claude/projects/…/*.jsonl</text>
+
+    <path d="M 1000 690 L 1030 690" stroke="#0891b2" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+    <rect x="1030" y="670" width="170" height="40" rx="6" fill="#ecfeff" stroke="#0891b2"/>
+    <text x="1115" y="688" font-size="11" font-weight="600" text-anchor="middle" fill="#0e7490">Replay transcript</text>
+    <text x="1115" y="702" font-size="10" text-anchor="middle" fill="#155e75">reconstruct messages[]</text>
+
+    <path d="M 1115 710 L 1115 735" stroke="#0891b2" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+
+    <rect x="830" y="735" width="370" height="40" rx="6" fill="#ecfeff" stroke="#0891b2"/>
+    <text x="1015" y="753" font-size="11" font-weight="600" text-anchor="middle" fill="#0e7490">First new API call = cache MISS (re-prime server cache)</text>
+    <text x="1015" y="768" font-size="10" text-anchor="middle" fill="#155e75">subsequent turns HIT again · same cold-start penalty as Turn 1</text>
+
+    <rect x="830" y="785" width="370" height="62" rx="6" fill="#fff" stroke="#0891b2" stroke-dasharray="3,2"/>
+    <text x="842" y="802" font-size="11" font-weight="700" fill="#0e7490">What survives across sessions:</text>
+    <text x="842" y="818" font-size="10" fill="#374151">• MEMORY.md (user/feedback/project/reference notes)</text>
+    <text x="842" y="832" font-size="10" fill="#374151">• CLAUDE.md files · settings.json · plugin state</text>
+    <text x="842" y="844" font-size="10" fill="#6b7280">✗ server-side KV cache (TTL ~5min) → refilled on resume</text>
+  </g>
+
+  <!-- ============ PHASE 6: OPUS STRATEGIES ============ -->
+  <g>
+    <rect x="1230" y="620" width="340" height="240" rx="12" fill="#fff" stroke="#d4d4d8" stroke-width="1.5"/>
+    <rect x="1230" y="620" width="340" height="32" rx="12" fill="#be123c"/>
+    <text x="1246" y="642" font-size="14" font-weight="700" fill="#fff">⑥ OPUS 4.x STRATEGIES</text>
+
+    <g font-size="11" fill="#111">
+      <circle cx="1250" cy="678" r="3" fill="#be123c"/>
+      <text x="1260" y="682" font-weight="700">Extended thinking</text>
+      <text x="1260" y="696" font-size="10" fill="#374151">larger reasoning budget · plan before acting</text>
+
+      <circle cx="1250" cy="716" r="3" fill="#be123c"/>
+      <text x="1260" y="720" font-weight="700">Interleaved tool use</text>
+      <text x="1260" y="734" font-size="10" fill="#374151">think → tool → think → tool (not batch then act)</text>
+
+      <circle cx="1250" cy="754" r="3" fill="#be123c"/>
+      <text x="1260" y="758" font-weight="700">Parallel fan-out</text>
+      <text x="1260" y="772" font-size="10" fill="#374151">emit multiple tool_use blocks in one response</text>
+
+      <circle cx="1250" cy="792" r="3" fill="#be123c"/>
+      <text x="1260" y="796" font-weight="700">Delegation to sub-agents</text>
+      <text x="1260" y="810" font-size="10" fill="#374151">isolate heavy search · route cheap work to Haiku</text>
+
+      <circle cx="1250" cy="830" r="3" fill="#be123c"/>
+      <text x="1260" y="834" font-weight="700">Plan mode + memory</text>
+      <text x="1260" y="848" font-size="10" fill="#374151">explicit plan before edits · persist facts to MEMORY.md</text>
+    </g>
+  </g>
+
+  <!-- ============ BOTTOM: LATENCY PROFILE ============ -->
+  <g>
+    <rect x="40" y="890" width="1530" height="290" rx="12" fill="#fff" stroke="#d4d4d8" stroke-width="1.5"/>
+    <rect x="40" y="890" width="1530" height="32" rx="12" fill="#111827"/>
+    <text x="56" y="912" font-size="14" font-weight="700" fill="#fff">⑦ LATENCY PROFILE — why the FIRST message feels slow</text>
+
+    <!-- Timeline -->
+    <line x1="80" y1="1030" x2="1530" y2="1030" stroke="#111" stroke-width="2"/>
+    <text x="80" y="1055" font-size="10" fill="#374151">t=0</text>
+    <text x="1510" y="1055" font-size="10" fill="#374151">first token</text>
+
+    <!-- Segments Turn 1 -->
+    <rect x="80" y="960" width="180" height="60" fill="#fee2e2" stroke="#b91c1c"/>
+    <text x="170" y="984" font-size="11" font-weight="700" text-anchor="middle" fill="#7f1d1d">CLI bootstrap</text>
+    <text x="170" y="1000" font-size="10" text-anchor="middle" fill="#7f1d1d">plugins · MCP · CLAUDE.md</text>
+    <text x="170" y="1014" font-size="10" text-anchor="middle" fill="#7f1d1d">~0.3–2s</text>
+
+    <rect x="260" y="960" width="120" height="60" fill="#fed7aa" stroke="#c2410c"/>
+    <text x="320" y="984" font-size="11" font-weight="700" text-anchor="middle" fill="#7c2d12">Network</text>
+    <text x="320" y="1000" font-size="10" text-anchor="middle" fill="#7c2d12">TLS · route</text>
+    <text x="320" y="1014" font-size="10" text-anchor="middle" fill="#7c2d12">~50–200ms</text>
+
+    <rect x="380" y="960" width="420" height="60" fill="#fef3c7" stroke="#a16207"/>
+    <text x="590" y="984" font-size="11" font-weight="700" text-anchor="middle" fill="#713f12">PREFILL (cache miss) — dominant</text>
+    <text x="590" y="1000" font-size="10" text-anchor="middle" fill="#713f12">process ~20–50k input tokens from scratch</text>
+    <text x="590" y="1014" font-size="10" text-anchor="middle" fill="#713f12">compute-bound · scales linearly with prompt size</text>
+
+    <rect x="800" y="960" width="220" height="60" fill="#e0e7ff" stroke="#4338ca"/>
+    <text x="910" y="984" font-size="11" font-weight="700" text-anchor="middle" fill="#312e81">Thinking</text>
+    <text x="910" y="1000" font-size="10" text-anchor="middle" fill="#312e81">reasoning tokens generated</text>
+    <text x="910" y="1014" font-size="10" text-anchor="middle" fill="#312e81">(Opus extended budget)</text>
+
+    <rect x="1020" y="960" width="510" height="60" fill="#d1fae5" stroke="#047857"/>
+    <text x="1275" y="984" font-size="11" font-weight="700" text-anchor="middle" fill="#064e3b">DECODE · streaming output</text>
+    <text x="1275" y="1000" font-size="10" text-anchor="middle" fill="#064e3b">autoregressive · ~30–80 tok/s · memory-bandwidth bound</text>
+    <text x="1275" y="1014" font-size="10" text-anchor="middle" fill="#064e3b">user starts seeing tokens here (TTFT)</text>
+
+    <!-- Turn 2 comparison -->
+    <text x="80" y="1085" font-size="12" font-weight="700" fill="#111">Turn 2+:</text>
+    <rect x="140" y="1070" width="60" height="24" fill="#fee2e2" stroke="#b91c1c"/>
+    <text x="170" y="1086" font-size="9" text-anchor="middle" fill="#7f1d1d">(skip)</text>
+    <rect x="200" y="1070" width="60" height="24" fill="#fed7aa" stroke="#c2410c"/>
+    <text x="230" y="1086" font-size="9" text-anchor="middle" fill="#7c2d12">net</text>
+    <rect x="260" y="1070" width="60" height="24" fill="#fef3c7" stroke="#a16207"/>
+    <text x="290" y="1086" font-size="9" text-anchor="middle" fill="#713f12">prefill ~10%</text>
+    <rect x="320" y="1070" width="120" height="24" fill="#e0e7ff" stroke="#4338ca"/>
+    <text x="380" y="1086" font-size="9" text-anchor="middle" fill="#312e81">think</text>
+    <rect x="440" y="1070" width="320" height="24" fill="#d1fae5" stroke="#047857"/>
+    <text x="600" y="1086" font-size="9" text-anchor="middle" fill="#064e3b">decode (same speed)</text>
+    <text x="780" y="1086" font-size="10" fill="#374151">→ prompt caching collapses prefill; bootstrap is already done</text>
+
+    <!-- Takeaway -->
+    <rect x="60" y="1110" width="1490" height="54" rx="6" fill="#f9fafb" stroke="#9ca3af"/>
+    <text x="80" y="1130" font-size="12" font-weight="700" fill="#111">Key insight:</text>
+    <text x="160" y="1130" font-size="11" fill="#374151">First-turn slowness = (CLI bootstrap) + (cold KV-cache prefill over the full system prompt) + (first-token decode).</text>
+    <text x="80" y="1148" font-size="11" fill="#374151">Turn 2+ keeps the server KV cache warm, so only the new user message and output tokens pay full cost — feels 5–10× snappier.</text>
+    <text x="80" y="1160" font-size="10" fill="#6b7280">Resume restarts this cycle (cache TTL ≈ 5 min server-side), which is why the first post-resume message also feels cold.</text>
+  </g>
+
+</svg>
