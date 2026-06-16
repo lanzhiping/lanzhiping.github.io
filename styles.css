@@ -613,6 +613,7 @@ img {
 .meta-row {
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 10px 14px;
   padding: 12px 0;
   border-top: 1px solid var(--line);
@@ -631,6 +632,28 @@ img {
 .meta-row a:hover,
 .meta-row a:focus-visible {
   text-decoration-color: currentColor;
+}
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 22px;
+  padding: 3px 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 34%, transparent);
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.has-card-image .status-badge,
+.hero-shell.has-feature-image .status-badge {
+  border-color: rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
 }
 
 .hero-summary {

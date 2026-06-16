@@ -3,7 +3,7 @@
     "title": "Zhiping Lan",
     "person": "Zhiping Lan",
     "googleAnalyticsId": "",
-    "generatedAt": "2026-06-16T09:12:24.099Z"
+    "generatedAt": "2026-06-16T09:25:38.275Z"
   },
   "ai": {
     "panelTitle": "AI Access",
@@ -39,10 +39,10 @@
   "recentBlogs": [
     {
       "title": "AI-First UI Components",
-      "summary": "To be done: a post about AI-First UI components and how they can extend traditional interfaces.",
+      "summary": "Exploring how AI-first UI components can extend traditional interfaces without requiring a full application redesign.",
       "date": "2026-03-23",
       "updated": "",
-      "status": "",
+      "status": "draft",
       "category": "",
       "tags": [
         "expedia",
@@ -53,14 +53,14 @@
       "repo": "",
       "docs": "",
       "file": "post-expedia-ai-first-ui.md",
-      "content": "Context\n\nIn the era of AI, everyone is talking about how to build an all-in-one chat web application like ChatGPT. However, that will be a huge breaking change for users and developers. Instead, I am more interested in how we can build AI-First UI components that can be easily integrated into existing applications, empowering traditional UI with AI capabilities without requiring a complete overhaul.\n\nTo Be Done\n\nThis article is still to be done. The final version will cover the AI-First UI component approach, implementation details, and practical integration notes."
+      "content": "Context\n\nIn the era of AI, everyone is talking about how to build an all-in-one chat web application like ChatGPT. However, that will be a huge breaking change for users and developers. Instead, I am more interested in how we can build AI-First UI components that can be easily integrated into existing applications, empowering traditional UI with AI capabilities without requiring a complete overhaul.\n\nCurrent Direction\n\nThe article will focus on a practical component-level approach rather than a full chat-based application model. The core idea is to make AI assistance available inside familiar workflows, close to the user's current task and context.\n\nPlanned Expansion\n\nThe final version will cover component patterns, integration details, and practical guidance for adding AI capability to existing product surfaces."
     },
     {
       "title": "Building a Shared Charting Library Across Multiple Expedia Teams",
       "summary": "How a reusable charting library reduced duplication, standardized data visualization, and improved delivery speed across internal teams.",
       "date": "2025-06-15",
       "updated": "",
-      "status": "",
+      "status": "draft",
       "category": "",
       "tags": [
         "expedia",
@@ -72,14 +72,14 @@
       "repo": "",
       "docs": "",
       "file": "post-expedia-charting-library.md",
-      "content": "Context\n\nAt Expedia Group, I built a custom charting library that was adopted across multiple teams. The original problem was repeated effort: teams were solving similar data visualization needs with inconsistent implementations, styling, and maintenance costs.\n\nWhat I Want To Expand Later\n\nThe design constraints that pushed us toward a shared library\nThe API design decisions that helped adoption\nHow we balanced flexibility with consistency\n\nDraft Story\n\nThe core goal was not just to build components, but to create a reliable internal platform for product teams shipping metrics-heavy experiences. By packaging shared charting patterns into a reusable library, we reduced duplication and made dashboards easier to build and maintain.\n\nThis project also created a common language for frontend teams. Instead of rebuilding chart behavior for each surface, teams could focus on business logic and product outcomes.\n\nPlaceholder For Results\n\nI want to add more concrete adoption numbers, before-and-after implementation examples, and lessons learned from rollout."
+      "content": "Context\n\nAt Expedia Group, I built a custom charting library that was adopted across multiple teams. The original problem was repeated effort: teams were solving similar data visualization needs with inconsistent implementations, styling, and maintenance costs.\n\nCurrent Direction\n\nThe article will focus on the design constraints that pushed the team toward a shared library, the API decisions that helped adoption, and the balance between flexibility and consistency.\n\nDraft Story\n\nThe core goal was not just to build components, but to create a reliable internal platform for product teams shipping metrics-heavy experiences. By packaging shared charting patterns into a reusable library, we reduced duplication and made dashboards easier to build and maintain.\n\nThis project also created a common language for frontend teams. Instead of rebuilding chart behavior for each surface, teams could focus on business logic and product outcomes.\n\nPlanned Expansion\n\nThe final version will add concrete adoption details, before-and-after implementation examples, and lessons learned from rollout."
     },
     {
       "title": "Leading Frontend Architecture for a Rate Automation System",
-      "summary": "To be done: a post about leading frontend architecture for a rate automation system in Expedia PartnerCentral.",
+      "summary": "A frontend architecture story about building a rate automation system inside Expedia PartnerCentral.",
       "date": "2024-06-15",
       "updated": "",
-      "status": "",
+      "status": "draft",
       "category": "",
       "tags": [
         "expedia",
@@ -91,7 +91,7 @@
       "repo": "",
       "docs": "",
       "file": "post-expedia-rate-automation.md",
-      "content": "Context\n\nI led the frontend architecture for a rate automation system in Expedia PartnerCentral. The product area focused on helping partners manage pricing workflows more effectively inside a large-scale platform serving Expedia's global hotel partners.\n\nWhat Happened\n\nThis initiative required balancing product flexibility, architecture consistency, and long-term maintainability. As a technical lead, I worked across implementation details and broader system direction while partnering closely with PMs and UX designers.\n\nTo Be Done\n\nThis article is still to be done. The final version will cover the product problem, architecture decisions, impact after launch, and lessons from cross-team coordination.\n\nWhy This Matters\n\nThis was one of the clearest examples of combining technical leadership with product thinking. It was not only about writing code, but also about shaping direction, mentoring others, and keeping the system scalable as the initiative grew."
+      "content": "Context\n\nI led the frontend architecture for a rate automation system in Expedia PartnerCentral. The product area focused on helping partners manage pricing workflows more effectively inside a large-scale platform serving Expedia's global hotel partners.\n\nWhat Happened\n\nThis initiative required balancing product flexibility, architecture consistency, and long-term maintainability. As a technical lead, I worked across implementation details and broader system direction while partnering closely with PMs and UX designers.\n\nPlanned Expansion\n\nThe final version will expand on the product problem, the main frontend architecture decisions, the launch impact, and lessons from coordinating across product, UX, and engineering teams.\n\nWhy This Matters\n\nThis was one of the clearest examples of combining technical leadership with product thinking. It was not only about writing code, but also about shaping direction, mentoring others, and keeping the system scalable as the initiative grew."
     },
     {
       "title": "Shared UI Platform and Internal NPM Package",
@@ -114,10 +114,10 @@
     },
     {
       "title": "Executing a Zero-Downtime AWS Account Migration",
-      "summary": "To be done: a post covering the zero-downtime migration of a core application across AWS accounts.",
+      "summary": "A reliability-focused account migration story about moving a core application across AWS accounts without downtime.",
       "date": "2022-03-15",
       "updated": "",
-      "status": "",
+      "status": "draft",
       "category": "",
       "tags": [
         "aws",
@@ -129,7 +129,7 @@
       "repo": "",
       "docs": "",
       "file": "post-expedia-aws-migration.md",
-      "content": "Migration Goal\n\nOne of my notable achievements at Expedia Group was executing a zero-downtime AWS account migration for a core application. The challenge was to preserve system reliability while changing an important piece of the operational foundation.\n\nTo Be Done\n\nThis article is still to be done. The final version will cover migration planning, rollout strategy, fallback planning, stakeholder coordination, and verification steps."
+      "content": "Migration Goal\n\nOne of my notable achievements at Expedia Group was executing a zero-downtime AWS account migration for a core application. The challenge was to preserve system reliability while changing an important piece of the operational foundation.\n\nPlanned Expansion\n\nThe final version will cover migration planning, rollout strategy, fallback planning, stakeholder coordination, and verification steps."
     },
     {
       "title": "Shopping Website Progressive Filtering",
