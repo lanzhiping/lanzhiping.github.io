@@ -768,6 +768,13 @@ img {
   margin: 0;
 }
 
+.post-card .summary {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
 .card-link-main.has-card-image .summary {
   color: rgba(255, 255, 255, 0.9);
 }

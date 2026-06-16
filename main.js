@@ -364,6 +364,7 @@ function renderHomeView() {
     if (!lowered) return true;
     return [post.title, post.summary, ...(post.tags || [])].join(" ").toLowerCase().includes(lowered);
   });
+  const latestPosts = filteredPosts.slice(0, 4);
   const contactLinks = parsePairs(profile.links);
   const aiLinks = parsePairs(state.ai.panel_links);
   const completedRaces = state.races.filter((race) => race.bucket !== "upcoming");
@@ -429,8 +430,8 @@ function renderHomeView() {
       <section class="posts-grid panel" data-motion="rise">
         ${createSectionTitle(state.uiLabels.posts || "")}
         <div class="post-list">
-          ${filteredPosts.length
-      ? filteredPosts.map(renderPostCard).join("")
+          ${latestPosts.length
+      ? latestPosts.map(renderPostCard).join("")
       : `<p class="empty-state">${state.uiLabels.empty_post_search || ""}</p>`
     }
         </div>

@@ -23,17 +23,18 @@ My expertise spans AWS Cloud, CI/CD pipelines, React and TypeScript ecosystems, 
 
 ## Recent Blogs
 
-- AI-First UI Components (2026-03-23): Inspiring AI-First UI components, empowered traditional UI with AI capabilities
-- Building a Shared Charting Library Across Multiple Expedia Teams (2025-07-08): How a reusable charting library reduced duplication, standardized data visualization, and improved delivery speed across internal teams.
-- Leading Frontend Architecture for a Rate Automation System (2025-06-28): A draft write-up on leading frontend architecture for a large product initiative in Expedia PartnerCentral.
-- Shared UI Platform and Internal NPM Package (2025-06-28): Integrated a new UI toolkit into legacy systems through a reusable internal NPM package, improving consistency and easing adoption across teams.
-- Executing a Zero-Downtime AWS Account Migration (2025-06-18): A placeholder draft covering the zero-downtime migration of a core application across AWS accounts.
-- Building Asset Performance Management for Medical Devices (2025-06-08): A draft post about building an asset performance management system in the healthcare technology domain.
+- AI-First UI Components (2026-03-23): To be done: a post about AI-First UI components and how they can extend traditional interfaces.
+- Building a Shared Charting Library Across Multiple Expedia Teams (2025-06-15): How a reusable charting library reduced duplication, standardized data visualization, and improved delivery speed across internal teams.
+- Leading Frontend Architecture for a Rate Automation System (2024-06-15): To be done: a post about leading frontend architecture for a rate automation system in Expedia PartnerCentral.
+- Shared UI Platform and Internal NPM Package (2023-07-15): Integrated a new UI toolkit into legacy systems through a reusable internal NPM package, improving consistency and easing adoption across teams.
+- Executing a Zero-Downtime AWS Account Migration (2022-03-15): To be done: a post covering the zero-downtime migration of a core application across AWS accounts.
+- Shopping Website Progressive Filtering (2017-09-15): A filtering design that supports both server-side rendering and client-side updates for product listing pages.
+- Shopping Website Image Loading Optimization (2017-03-15): How I improved image loading with placeholders, multiple image sources, and a reusable img-src pattern.
 
 ## Past Projects
 
-- Burberry E-commerce Experience: Contributed to Burberry's e-commerce web application at EPAM Systems, with a focus on frontend delivery, performance improvement, and server-side rendering.
-- Expedia PartnerCentral: Worked on Expedia PartnerCentral, a property management platform serving Expedia's global hotel partners, with contributions spanning dashboards, rate automation, competitiveness tooling, and platform migration work.
+- Burberry E-commerce Experience: At EPAM Systems, I contributed to Burberry's e-commerce platform through frontend engineering, performance improvements, rendering optimization, and internal knowledge sharing.
+- Expedia PartnerCentral: Senior Software Engineer at ExpediaGroup, leading frontend initiatives on Expedia PartnerCentral — a property management platform for global hotel partners — with a focus on dashboards, data visualization, and platform-wide tooling.
 - GE HealthCare Asset Performance Management: Built an Asset Performance Management system for medical devices in GE HealthCare's healthcare business unit.
 - Teleopti Workforce Scheduling Tools: Built enterprise scheduling tools at Teleopti, including seat planning and automated shift scheduling systems.
 

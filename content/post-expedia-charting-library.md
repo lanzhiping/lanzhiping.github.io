@@ -1,8 +1,7 @@
 ---
 type: post
-date: "2025-07-08"
+date: "2025-06-15"
 reading_time: "6 min read"
-image: "./assets/post-ai-first-ui-web.svg"
 title: "Building a Shared Charting Library Across Multiple Expedia Teams"
 image_alt: "Abstract system graphic representing a reusable frontend visualization platform"
 tags: ["expedia", "frontend architecture", "typescript", "react", "design systems"]

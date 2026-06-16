@@ -41,6 +41,9 @@ async function main() {
   const projects = await loadTypedEntries(projectFiles);
   const races = await loadTypedEntries(raceFiles);
   const skills = await loadTypedEntries(skillFiles);
+  const sortedBlogFiles = [...posts]
+    .sort((a, b) => new Date(b.date || 0) - new Date(a.date || 0))
+    .map((entry) => entry.file);
 
   const navLabels = Object.fromEntries(
     parseArrayPairs(ui.nav_labels).map((item) => [item.key, item.value])
@@ -68,7 +71,7 @@ async function main() {
     profileFile,
     uiFile,
     aiFile,
-    ...blogFiles,
+    ...sortedBlogFiles,
     ...projectFiles,
     ...skillFiles,
     ...raceFiles,
