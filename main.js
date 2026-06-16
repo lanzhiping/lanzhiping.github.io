@@ -307,6 +307,13 @@ function renderTagList(tags) {
     .join("");
 }
 
+function renderStatusBadge(status) {
+  if (!status) return "";
+  const normalized = String(status).trim().toLowerCase();
+  if (normalized !== "draft") return "";
+  return `<span class="status-badge status-badge-draft">Draft</span>`;
+}
+
 function escapeAttribute(value) {
   return String(value)
     .replace(/&/g, "&amp;")
@@ -327,6 +334,7 @@ function renderPostCard(post) {
         <div class="post-card-content">
           <h3>${post.title || ""}</h3>
           <div class="meta-row">
+            ${renderStatusBadge(post.status)}
             <span>${formatDate(post.date)}</span>
             <span>${post.reading_time || state.uiLabels.post_reading_time_fallback || ""}</span>
           </div>
@@ -414,6 +422,7 @@ function renderHomeView() {
                     <h1 class="hero-title">${featuredPost.title || ""}</h1>
                   </a>
                   <div class="meta-row">
+                    ${renderStatusBadge(featuredPost.status)}
                     <span>${formatDate(featuredPost.date)}</span>
                     ${(Array.isArray(featuredPost.tags) ? featuredPost.tags : [])
         .map((tag) => `<a href="${getTagPath(tag)}">${tag}</a>`)
@@ -689,6 +698,7 @@ function renderPostDetailView(post) {
       ${renderPageIntro("Writing", post.title || "", post.summary || "")}
       ${post.image ? `<img class="detail-image" data-motion="rise" src="${post.image}" alt="${post.image_alt || post.title || ""}" />` : ""}
       <div class="meta-row article-meta" data-motion="rise">
+        ${renderStatusBadge(post.status)}
         <span>${formatDate(post.date)}</span>
         <span>${post.reading_time || state.uiLabels.post_reading_time_fallback || ""}</span>
       </div>

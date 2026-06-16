@@ -233,7 +233,7 @@ function toAiEntry(entry) {
 
 function buildClaudeCodeSkill(aiContext, ai) {
   const recentBlogLines = aiContext.recentBlogs
-    .map((post) => `- ${post.title}${post.date ? ` (${post.date})` : ""}: ${post.summary}`)
+    .map((post) => `- ${post.status === "draft" ? "[Draft] " : ""}${post.title}${post.date ? ` (${post.date})` : ""}: ${post.summary}`)
     .join("\n");
   const projectLines = aiContext.pastProjects
     .map((project) => `- ${project.title}: ${project.summary}`)

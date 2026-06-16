@@ -5,6 +5,7 @@ reading_time: "6 min read"
 title: "Building a Shared Charting Library Across Multiple Expedia Teams"
 image_alt: "Abstract system graphic representing a reusable frontend visualization platform"
 tags: ["expedia", "frontend architecture", "typescript", "react", "design systems"]
+status: "draft"
 summary: "How a reusable charting library reduced duplication, standardized data visualization, and improved delivery speed across internal teams."
 ---
 
@@ -12,11 +13,9 @@ summary: "How a reusable charting library reduced duplication, standardized data
 
 At Expedia Group, I built a custom charting library that was adopted across multiple teams. The original problem was repeated effort: teams were solving similar data visualization needs with inconsistent implementations, styling, and maintenance costs.
 
-## What I Want To Expand Later
+## Current Direction
 
-- The design constraints that pushed us toward a shared library
-- The API design decisions that helped adoption
-- How we balanced flexibility with consistency
+The article will focus on the design constraints that pushed the team toward a shared library, the API decisions that helped adoption, and the balance between flexibility and consistency.
 
 ## Draft Story
 
@@ -24,6 +23,6 @@ The core goal was not just to build components, but to create a reliable interna
 
 This project also created a common language for frontend teams. Instead of rebuilding chart behavior for each surface, teams could focus on business logic and product outcomes.
 
-## Placeholder For Results
+## Planned Expansion
 
-I want to add more concrete adoption numbers, before-and-after implementation examples, and lessons learned from rollout.
+The final version will add concrete adoption details, before-and-after implementation examples, and lessons learned from rollout.

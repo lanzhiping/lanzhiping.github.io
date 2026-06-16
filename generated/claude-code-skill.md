@@ -23,11 +23,11 @@ My expertise spans AWS Cloud, CI/CD pipelines, React and TypeScript ecosystems, 
 
 ## Recent Blogs
 
-- AI-First UI Components (2026-03-23): To be done: a post about AI-First UI components and how they can extend traditional interfaces.
-- Building a Shared Charting Library Across Multiple Expedia Teams (2025-06-15): How a reusable charting library reduced duplication, standardized data visualization, and improved delivery speed across internal teams.
-- Leading Frontend Architecture for a Rate Automation System (2024-06-15): To be done: a post about leading frontend architecture for a rate automation system in Expedia PartnerCentral.
+- [Draft] AI-First UI Components (2026-03-23): Exploring how AI-first UI components can extend traditional interfaces without requiring a full application redesign.
+- [Draft] Building a Shared Charting Library Across Multiple Expedia Teams (2025-06-15): How a reusable charting library reduced duplication, standardized data visualization, and improved delivery speed across internal teams.
+- [Draft] Leading Frontend Architecture for a Rate Automation System (2024-06-15): A frontend architecture story about building a rate automation system inside Expedia PartnerCentral.
 - Shared UI Platform and Internal NPM Package (2023-07-15): Integrated a new UI toolkit into legacy systems through a reusable internal NPM package, improving consistency and easing adoption across teams.
-- Executing a Zero-Downtime AWS Account Migration (2022-03-15): To be done: a post covering the zero-downtime migration of a core application across AWS accounts.
+- [Draft] Executing a Zero-Downtime AWS Account Migration (2022-03-15): A reliability-focused account migration story about moving a core application across AWS accounts without downtime.
 - Shopping Website Progressive Filtering (2017-09-15): A filtering design that supports both server-side rendering and client-side updates for product listing pages.
 - Shopping Website Image Loading Optimization (2017-03-15): How I improved image loading with placeholders, multiple image sources, and a reusable img-src pattern.
 
