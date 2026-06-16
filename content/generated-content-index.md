@@ -3,11 +3,12 @@
 - config-ui.md
 - config-ai.md
 - post-expedia-ai-first-ui.md
-- post-expedia-aws-migration.md
 - post-expedia-charting-library.md
 - post-expedia-rate-automation.md
 - post-expedia-shared-ui-platform.md
-- post-ge-apm.md
+- post-expedia-aws-migration.md
+- post-epam-burberry-progressive-filtering.md
+- post-epam-burberry-image-loading-optimization.md
 - project-burberry-ecommerce.md
 - project-expedia-partnercentral.md
 - project-ge-apm.md

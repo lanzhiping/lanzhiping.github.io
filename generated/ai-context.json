@@ -3,7 +3,7 @@
     "title": "Zhiping Lan",
     "person": "Zhiping Lan",
     "googleAnalyticsId": "",
-    "generatedAt": "2026-03-24T16:49:18.716Z"
+    "generatedAt": "2026-06-16T09:12:24.099Z"
   },
   "ai": {
     "panelTitle": "AI Access",
@@ -32,14 +32,14 @@
       "Email|mailto:lanzhiping6@gmail.com",
       "Phone|tel:+8618565707513",
       "Website|https://lanzhiping.github.io",
-      "LinkedIn|https://linkedin.com/in/zhiping-lan-a51117b9|linkedin.com/in/zhiping-lan"
+      "LinkedIn|https://www.linkedin.com/in/zhiping-lan|linkedin.com/in/zhiping-lan"
     ],
     "bio": "ExpediaGroup | GE HealthCare | EPAM Systems | Teleopti\n\nA senior software engineer and tech lead with 10+ years of experience building scalable web applications and leading technical initiatives across travel, healthcare, retail, workforce management, and AI-related products.\n\nThroughout my career, I've had the opportunity to work with leading organizations including ExpediaGroup, GE HealthCare, EPAM Systems, Teleopti, and FDT AI, where I've built and launched partner platforms, enterprise dashboards, medical-device asset systems, e-commerce experiences, scheduling products, and internal tooling that empowered multiple teams.\n\nMy expertise spans AWS Cloud, CI/CD pipelines, React and TypeScript ecosystems, frontend architecture, technical mentoring, and collaborative partnerships with product and design teams to deliver impactful solutions."
   },
   "recentBlogs": [
     {
       "title": "AI-First UI Components",
-      "summary": "Inspiring AI-First UI components, empowered traditional UI with AI capabilities",
+      "summary": "To be done: a post about AI-First UI components and how they can extend traditional interfaces.",
       "date": "2026-03-23",
       "updated": "",
       "status": "",
@@ -53,12 +53,12 @@
       "repo": "",
       "docs": "",
       "file": "post-expedia-ai-first-ui.md",
-      "content": "Context\n\nIn the era of AI, everyone is talking about how to build an all-in-one chat web application like ChatGPT. However, that will be a huge breaking change for users and developers. Instead, I am more interested in how we can build AI-First UI components that can be easily integrated into existing applications, empowering traditional UI with AI capabilities without requiring a complete overhaul.\n\nAI-First UI Components\n\ndrafting..."
+      "content": "Context\n\nIn the era of AI, everyone is talking about how to build an all-in-one chat web application like ChatGPT. However, that will be a huge breaking change for users and developers. Instead, I am more interested in how we can build AI-First UI components that can be easily integrated into existing applications, empowering traditional UI with AI capabilities without requiring a complete overhaul.\n\nTo Be Done\n\nThis article is still to be done. The final version will cover the AI-First UI component approach, implementation details, and practical integration notes."
     },
     {
       "title": "Building a Shared Charting Library Across Multiple Expedia Teams",
       "summary": "How a reusable charting library reduced duplication, standardized data visualization, and improved delivery speed across internal teams.",
-      "date": "2025-07-08",
+      "date": "2025-06-15",
       "updated": "",
       "status": "",
       "category": "",
@@ -76,8 +76,8 @@
     },
     {
       "title": "Leading Frontend Architecture for a Rate Automation System",
-      "summary": "A draft write-up on leading frontend architecture for a large product initiative in Expedia PartnerCentral.",
-      "date": "2025-06-28",
+      "summary": "To be done: a post about leading frontend architecture for a rate automation system in Expedia PartnerCentral.",
+      "date": "2024-06-15",
       "updated": "",
       "status": "",
       "category": "",
@@ -91,12 +91,12 @@
       "repo": "",
       "docs": "",
       "file": "post-expedia-rate-automation.md",
-      "content": "Context\n\nI led the frontend architecture for a rate automation system in Expedia PartnerCentral. The product area focused on helping partners manage pricing workflows more effectively inside a large-scale platform serving Expedia's global hotel partners.\n\nWhat Happened\n\nThis initiative required balancing product flexibility, architecture consistency, and long-term maintainability. As a technical lead, I worked across implementation details and broader system direction while partnering closely with PMs and UX designers.\n\nPlaceholder Details To Fill In\n\nThe product problem and target user flow\nThe main technical decisions behind the frontend architecture\nPerformance, adoption, or operational impact after launch\nLessons from coordinating across teams and legacy systems\n\nWhy This Matters\n\nThis was one of the clearest examples of combining technical leadership with product thinking. It was not only about writing code, but also about shaping direction, mentoring others, and keeping the system scalable as the initiative grew."
+      "content": "Context\n\nI led the frontend architecture for a rate automation system in Expedia PartnerCentral. The product area focused on helping partners manage pricing workflows more effectively inside a large-scale platform serving Expedia's global hotel partners.\n\nWhat Happened\n\nThis initiative required balancing product flexibility, architecture consistency, and long-term maintainability. As a technical lead, I worked across implementation details and broader system direction while partnering closely with PMs and UX designers.\n\nTo Be Done\n\nThis article is still to be done. The final version will cover the product problem, architecture decisions, impact after launch, and lessons from cross-team coordination.\n\nWhy This Matters\n\nThis was one of the clearest examples of combining technical leadership with product thinking. It was not only about writing code, but also about shaping direction, mentoring others, and keeping the system scalable as the initiative grew."
     },
     {
       "title": "Shared UI Platform and Internal NPM Package",
       "summary": "Integrated a new UI toolkit into legacy systems through a reusable internal NPM package, improving consistency and easing adoption across teams.",
-      "date": "2025-06-28",
+      "date": "2023-07-15",
       "updated": "",
       "status": "",
       "category": "",
@@ -114,8 +114,8 @@
     },
     {
       "title": "Executing a Zero-Downtime AWS Account Migration",
-      "summary": "A placeholder draft covering the zero-downtime migration of a core application across AWS accounts.",
-      "date": "2025-06-18",
+      "summary": "To be done: a post covering the zero-downtime migration of a core application across AWS accounts.",
+      "date": "2022-03-15",
       "updated": "",
       "status": "",
       "category": "",
@@ -129,54 +129,88 @@
       "repo": "",
       "docs": "",
       "file": "post-expedia-aws-migration.md",
-      "content": "Migration Goal\n\nOne of my notable achievements at Expedia Group was executing a zero-downtime AWS account migration for a core application. The challenge was to preserve system reliability while changing an important piece of the operational foundation.\n\nDraft Focus Areas\n\nMigration planning and rollout strategy\nRisk reduction and fallback planning\nCoordination across engineering and platform stakeholders\nWhat made zero-downtime execution possible\n\nPlaceholder For More Detail\n\nI want to add the architecture diagram, migration sequencing, and verification steps I used so this can become a stronger technical case study later."
+      "content": "Migration Goal\n\nOne of my notable achievements at Expedia Group was executing a zero-downtime AWS account migration for a core application. The challenge was to preserve system reliability while changing an important piece of the operational foundation.\n\nTo Be Done\n\nThis article is still to be done. The final version will cover migration planning, rollout strategy, fallback planning, stakeholder coordination, and verification steps."
     },
     {
-      "title": "Building Asset Performance Management for Medical Devices",
-      "summary": "A draft post about building an asset performance management system in the healthcare technology domain.",
-      "date": "2025-06-08",
+      "title": "Shopping Website Progressive Filtering",
+      "summary": "A filtering design that supports both server-side rendering and client-side updates for product listing pages.",
+      "date": "2017-09-15",
       "updated": "",
       "status": "",
       "category": "",
       "tags": [
-        "ge healthcare",
-        "medical devices",
-        "enterprise software",
+        "frontend",
+        "ssr",
         "react",
-        "redux"
+        "architecture"
       ],
       "repo": "",
       "docs": "",
-      "file": "post-ge-apm.md",
-      "content": "Context\n\nAt GE HealthCare, I worked in the healthcare business unit and built an Asset Performance Management system for medical devices. This work sat at the intersection of enterprise software, reliability, and healthcare operations.\n\nWhy It Was Important\n\nThe project required careful attention to product quality, maintainability, and team collaboration. It also became a strong example of how I contributed beyond implementation by mentoring peers, interviewing candidates, and supporting onboarding.\n\nPlaceholder Details To Fill In\n\nThe user and business problem behind the platform\nWhat the system helped teams monitor or improve\nKey frontend or platform design choices\nWhat I learned from working in a healthcare technology environment"
+      "file": "post-epam-burberry-progressive-filtering.md",
+      "content": "Context\n\nAt EPAM Systems, I worked on a shopping website experience where filtering needed to work well in both server-rendered and browser-rendered flows. The main challenge was keeping the page fast and shareable without sacrificing interactive behavior once JavaScript was available.\n\nSSR Flow\n\nOn the server side, the page reads the selected filter state from the URL query parameter. That allows the product listing page to be built with the chosen filters already applied, so the initial response is usable immediately and can be indexed or shared as a normal URL.\n\nThe server then assembles the product listing items dynamically based on that filter state. This keeps the markup aligned with the selected filters instead of relying on the browser to fix the page after load.\n\nClient-Side Flow\n\nOnce the browser takes over, JavaScript re-renders both the filter component and the product list component. When a user changes a filter, the interface updates the displayed items without requiring a full page reload.\n\nThis gives the experience a progressive enhancement model: the server delivers the first useful view, and the client adds smoother interactivity after hydration.\n\nWhy This Design Worked\n\nThe design kept SSR and client-side rendering in sync through the same filter state. That reduced edge cases, preserved a good initial load experience, and still let the user refine the listing fluidly in the browser.\n\nIt was also a practical architecture choice for commerce pages, where filter URLs need to be stable, shareable, and easy to rebuild from the incoming request."
+    },
+    {
+      "title": "Shopping Website Image Loading Optimization",
+      "summary": "How I improved image loading with placeholders, multiple image sources, and a reusable img-src pattern.",
+      "date": "2017-03-15",
+      "updated": "",
+      "status": "",
+      "category": "",
+      "tags": [
+        "frontend",
+        "performance",
+        "images",
+        "responsive images"
+      ],
+      "repo": "",
+      "docs": "",
+      "file": "post-epam-burberry-image-loading-optimization.md",
+      "content": "Context\n\nAt EPAM Systems, I worked on a shopping website frontend and spent time improving how product imagery loaded across the site. The goal was to keep pages visually stable while still delivering the right image for the user's device and network conditions.\n\nThe Problem\n\nCommerce pages depend heavily on images, but large assets can slow down rendering and make the interface feel unstable during load. We needed a pattern that could show something immediately, avoid layout shifts, and still pick the best available source for each viewport.\n\nThe Approach\n\nI introduced a placeholder image strategy so the UI could reserve space and show a low-cost visual before the final asset was ready. That reduced the sense of jank while the page was loading.\n\nFor the actual asset delivery, I used a multi-source pattern driven by an img-src tag so the page could describe more than one candidate image. The browser could then choose the most appropriate source while the frontend kept a consistent markup contract.\n\nWhat This Solved\n\nThis approach improved perceived performance, reduced visual instability, and made image behavior more predictable across the product experience. It also created a cleaner implementation model for other frontend surfaces that needed responsive image handling.\n\nWhy It Matters\n\nThis work was a good example of balancing polish and performance. In e-commerce, image delivery is part of the user experience, not just an asset-loading detail. Small improvements here made the site feel faster and more intentional."
     }
   ],
   "pastProjects": [
     {
       "title": "Burberry E-commerce Experience",
-      "summary": "Contributed to Burberry's e-commerce web application at EPAM Systems, with a focus on frontend delivery, performance improvement, and server-side rendering.",
+      "summary": "At EPAM Systems, I contributed to Burberry's e-commerce platform through frontend engineering, performance improvements, rendering optimization, and internal knowledge sharing.",
       "date": "",
       "updated": "",
       "status": "",
       "category": "",
-      "tags": [],
+      "tags": [
+        "burberry",
+        "e-commerce",
+        "frontend",
+        "performance",
+        "server-side rendering",
+        "knowledge sharing"
+      ],
       "repo": "",
       "docs": "",
       "file": "project-burberry-ecommerce.md",
-      "content": "Project\n\nThis project involved contributing to the development of Burberry's e-commerce web application, which serves as a critical platform for the brand's online retail presence. My role encompassed frontend development, performance optimization, and implementing server-side rendering to enhance user experience and SEO.\n\nDetails\n\nKey contributions included frontend development for the e-commerce experience, performance improvements through server-side rendering and image optimization, and team enablement through JavaScript fundamentals training, onboarding support, and interviews."
+      "content": "Overview\n\nAt EPAM Systems, I contributed to Burberry's e-commerce web application, a customer-facing platform that supported the brand's online retail experience. My work focused on frontend engineering and performance improvement, with an emphasis on building a fast, polished, and reliable experience for users.\n\nFrontend and Performance Work\n\nI worked on frontend improvements that helped enhance the overall responsiveness and efficiency of the application. This included optimizing how frontend assets were delivered, improving rendering performance, and supporting a more scalable server-side setup for the web application.\n\nI also contributed to media delivery improvements by applying responsive image techniques, helping ensure that users received appropriately sized assets for different devices and viewing conditions. These efforts supported better loading behavior and a smoother browsing experience.\n\nRendering and User Experience\n\nPart of my work involved improving server-side rendering to support both user experience and search visibility. This helped strengthen the initial page experience for content-heavy commerce pages and contributed to better overall frontend performance.\n\nTeam Contribution\n\nBeyond product delivery, I contributed to team development through onboarding support, knowledge sharing, and technical interviews. I also delivered internal JavaScript Fundamentals lessons, helping colleagues strengthen core language knowledge and frontend development practices.\n\nWhy This Experience Matters\n\nThis experience was meaningful because it combined hands-on product work with broader engineering impact. It was not only about delivering features, but also about improving performance, maintainability, and team capability. It reflects the kind of work I enjoy most: building user-focused web experiences while contributing to a stronger engineering culture.\n\nHighlights\n\nContributed to frontend improvements for a global e-commerce experience\nSupported performance optimization across rendering and asset delivery\nApplied responsive image techniques to improve media loading efficiency\nHelped strengthen engineering practices through onboarding, teaching, and interviews"
     },
     {
       "title": "Expedia PartnerCentral",
-      "summary": "Worked on Expedia PartnerCentral, a property management platform serving Expedia's global hotel partners, with contributions spanning dashboards, rate automation, competitiveness tooling, and platform migration work.",
+      "summary": "Senior Software Engineer at ExpediaGroup, leading frontend initiatives on Expedia PartnerCentral — a property management platform for global hotel partners — with a focus on dashboards, data visualization, and platform-wide tooling.",
       "date": "",
       "updated": "",
       "status": "",
       "category": "",
-      "tags": [],
+      "tags": [
+        "expedia",
+        "travel tech",
+        "frontend",
+        "platform",
+        "technical leadership",
+        "typescript",
+        "react",
+        "graphql",
+        "aws"
+      ],
       "repo": "",
       "docs": "",
       "file": "project-expedia-partnercentral.md",
-      "content": "PartnerCentral\n\nExpedia PartnerCentral is the strongest example of my recent work at scale. I contributed as both an individual engineer and a technical lead, partnering with PMs and UX designers, mentoring junior developers, helping shape architecture, and supporting team delivery processes.\n\nHighlights from this work include a dynamic metrics dashboard, a shared charting library used across teams, a rate automation system, a partner competitiveness optimization system, and a zero-downtime AWS account migration of a core application."
+      "content": "PartnerCentral\n\nAs a Senior Software Engineer at ExpediaGroup (April 2021–present), I reported to the Director of Engineering and worked closely with PMs and UX designers to shape product direction and system architecture. I acted as technical lead across multiple initiatives, mentored junior developers, organized coding training sessions, and participated in hiring processes. I also facilitated scrum rituals including sprint planning, backlog grooming, and retrospectives.\n\nKey achievements include:\n\nCustom charting library — Built a charting library adopted across multiple teams, standardizing data visualization practices and eliminating duplication.\nDynamic metrics dashboard — Delivered a metrics dashboard for Expedia PartnerCentral that improved visibility into key product performance indicators for internal stakeholders.\nUI toolkit integration — Led the integration of a new UI toolkit into legacy systems via a reusable NPM package adopted department-wide.\n\nTech Stack: TypeScript, React, Node.js, ECharts, Webpack, GraphQL, NPM, AWS Lambda, API Gateway, ECS, GitHub Actions, Jenkins, Spinnaker"
     },
     {
       "title": "GE HealthCare Asset Performance Management",
@@ -185,7 +219,14 @@
       "updated": "",
       "status": "",
       "category": "",
-      "tags": [],
+      "tags": [
+        "ge healthcare",
+        "medical devices",
+        "enterprise software",
+        "frontend",
+        "react",
+        "technical leadership"
+      ],
       "repo": "",
       "docs": "",
       "file": "project-ge-apm.md",
@@ -198,7 +239,14 @@
       "updated": "",
       "status": "",
       "category": "",
-      "tags": [],
+      "tags": [
+        "teleopti",
+        "workforce scheduling",
+        "enterprise software",
+        "frontend",
+        "angularjs",
+        "agile collaboration"
+      ],
       "repo": "",
       "docs": "",
       "file": "project-teleopti-workforce.md",

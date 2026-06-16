@@ -1,10 +1,10 @@
 ---
 type: post
 title: "Leading Frontend Architecture for a Rate Automation System"
-date: "2025-06-28"
+date: "2024-06-15"
 reading_time: "7 min read"
 tags: ["expedia", "frontend", "architecture", "graphql", "react"]
-summary: "A draft write-up on leading frontend architecture for a large product initiative in Expedia PartnerCentral."
+summary: "To be done: a post about leading frontend architecture for a rate automation system in Expedia PartnerCentral."
 ---
 
 ## Context
@@ -15,12 +15,9 @@ I led the frontend architecture for a rate automation system in Expedia PartnerC
 
 This initiative required balancing product flexibility, architecture consistency, and long-term maintainability. As a technical lead, I worked across implementation details and broader system direction while partnering closely with PMs and UX designers.
 
-## Placeholder Details To Fill In
+## To Be Done
 
-- The product problem and target user flow
-- The main technical decisions behind the frontend architecture
-- Performance, adoption, or operational impact after launch
-- Lessons from coordinating across teams and legacy systems
+This article is still to be done. The final version will cover the product problem, architecture decisions, impact after launch, and lessons from cross-team coordination.
 
 ## Why This Matters
 
