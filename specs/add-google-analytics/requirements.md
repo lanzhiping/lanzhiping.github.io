@@ -2,58 +2,54 @@
 
 ## Goal
 
-Add Google Analytics tracking to the GitHub Pages site using the provided Google tag while preserving all existing site behavior.
+Improve Google Analytics tracking detail for the GitHub Pages SPA so visits and interactions can be identified by internal page, content item, link type, UI region, and user action in Google Analytics.
 
 ## User Stories
 
-### US-1: Page Analytics
+### US-1: SPA Page Analytics
 
 **As a** site owner
-**I want to** load Google Analytics on the GitHub Pages site
-**So that** page visits can be measured in Google Analytics
+**I want to** track each hash-routed page as a distinct page view
+**So that** Google Analytics reports show home, about, posts, projects, filtered listings, and detail pages separately
 
 **Acceptance Criteria:**
-- AC-1.1: `index.html` loads `https://www.googletagmanager.com/gtag/js?id=G-EHDL9M60FS` with `async`.
-- AC-1.2: `gtag('config', 'G-EHDL9M60FS')` is present in the head.
-- AC-1.3: Existing scripts and app module loading remain present and in their original roles.
+- AC-1.1: GA automatic page views are disabled in `index.html`.
+- AC-1.2: `main.js` sends manual `page_view` events after each route render.
+- AC-1.3: Page views include `page_path`, `page_title`, `route_name`, `content_type`, and `content_id`.
+- AC-1.4: Duplicate page views are avoided when the same hash route is rendered again.
+
+### US-2: Link And Button Analytics
+
+**As a** site owner
+**I want to** track important links, buttons, and content clicks
+**So that** I can identify what users interact with and where those interactions happen
+
+**Acceptance Criteria:**
+- AC-2.1: Top nav, brand, read-more, topic chips, hero links, post cards, project cards, back links, AI resource links, skill links, and contact links are tracked.
+- AC-2.2: Events include link/action metadata: `link_url`, `link_text`, `link_domain`, `outbound`, `ui_region`, `link_action`, `content_type`, and `content_id` where available.
+- AC-2.3: Search submits produce a `search` event with `search_term`.
+- AC-2.4: Theme changes produce a `theme_change` event with the selected `theme`.
 
 ## Functional Requirements
 
 | ID | Requirement | Priority | Acceptance Criteria |
 |----|-------------|----------|---------------------|
-| FR-1 | Add the Google Analytics tag to the page head | High | Official loader and config snippet appear in `index.html` |
-| FR-2 | Preserve existing runtime logic | High | Theme, title, stylesheet, and module script entries remain intact |
+| FR-1 | Keep Google Analytics configured with measurement ID `G-EHDL9M60FS` | High | AC-1.1 |
+| FR-2 | Track hash-routed page views manually | High | AC-1.2, AC-1.3, AC-1.4 |
+| FR-3 | Add stable analytics attributes to generated links and controls | High | AC-2.1, AC-2.2 |
+| FR-4 | Track delegated click events for internal, resource, contact, and outbound links | High | AC-2.1, AC-2.2 |
+| FR-5 | Track search and theme interactions | Medium | AC-2.3, AC-2.4 |
 
 ## Non-Functional Requirements
 
 | ID | Requirement | Metric | Target |
 |----|-------------|--------|--------|
-| NFR-1 | Performance | Script loading mode | Analytics loader uses `async` |
-| NFR-2 | Maintainability | Scope of change | No app JavaScript refactor or new dependencies |
-
-## Glossary
-
-- **gtag.js**: Google's JavaScript tag library for Google Analytics.
-- **Measurement ID**: Google Analytics stream identifier, here `G-EHDL9M60FS`.
-
-## Out of Scope
-
-- Cookie consent UI.
-- Custom analytics events.
-- Changes to `main.js`, styles, or content files.
-
-## Dependencies
-
-- Google Tag Manager hosted `gtag.js`.
+| NFR-1 | Performance | Dependencies | No new package dependency |
+| NFR-2 | Maintainability | Scope | Analytics helper functions stay isolated in `main.js` |
+| NFR-3 | Resilience | Missing/blocked GA | Site behavior continues when `gtag` is unavailable |
 
 ## Success Criteria
 
-- The supplied Google Analytics snippet is present in `index.html`.
-- Static validation confirms existing script references remain present.
-
-## Risks
-
-| Risk | Impact | Mitigation |
-|------|--------|------------|
-| External analytics script is blocked by a browser or extension | Low | Site functionality does not depend on the analytics script |
-| Snippet accidentally changes app bootstrap order | Medium | Insert before existing scripts without editing their bodies |
+- Browser verification shows manual `page_view` events for home, listing, and detail routes.
+- Browser verification shows interaction events for nav, search, theme, and card clicks.
+- Static verification confirms `send_page_view: false`, analytics helpers, and `data-analytics-*` attributes are present.

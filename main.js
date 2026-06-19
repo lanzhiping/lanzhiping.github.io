@@ -1,6 +1,7 @@
 const CONTENT_ROOT = "./content/";
 const GENERATED_ROOT = "./generated/";
 const CONTENT_INDEX_FILE = "generated-content-index.md";
+const GA_MEASUREMENT_ID = "G-EHDL9M60FS";
 const DATE_FORMATTER = new Intl.DateTimeFormat("en-US", {
   month: "short",
   day: "numeric",
@@ -23,6 +24,7 @@ const state = {
 
 let revealObserver;
 let motionFrame = null;
+let lastTrackedPagePath = "";
 
 async function loadText(path) {
   const response = await fetch(path);
@@ -230,6 +232,110 @@ function getSearchRoute(query) {
   return trimmed ? `#/posts?q=${encodeURIComponent(trimmed)}` : "#/posts";
 }
 
+function isAnalyticsReady() {
+  return typeof window.gtag === "function";
+}
+
+function getRoutePath() {
+  const hash = window.location.hash || "#/";
+  return hash.startsWith("#") ? hash : `#${hash}`;
+}
+
+function getRouteAnalytics(route) {
+  const tag = route.search.get("tag") || "";
+  const query = route.search.get("q") || "";
+  const details = {
+    routeName: route.name,
+    contentType: route.name,
+    contentId: route.params.slug || "",
+    title: state.site.title || document.title || "Portfolio",
+  };
+
+  if (route.name === "home") {
+    details.title = state.site.title || "Home";
+    details.contentType = "home";
+  } else if (route.name === "about") {
+    details.title = state.profile.name ? `About ${state.profile.name}` : "About";
+    details.contentType = "page";
+    details.contentId = "about";
+  } else if (route.name === "posts") {
+    details.title = tag ? `Posts tagged ${tag}` : query ? `Posts search: ${query}` : state.uiLabels.posts || "Posts";
+    details.contentType = "listing";
+    details.contentId = tag ? `tag:${tag}` : query ? `query:${query}` : "posts";
+  } else if (route.name === "post-detail") {
+    const post = state.posts.find((entry) => entry.slug === route.params.slug);
+    details.title = post?.title || "Post not found";
+    details.contentType = "post";
+  } else if (route.name === "projects") {
+    details.title = state.uiLabels.projects || "Projects";
+    details.contentType = "listing";
+    details.contentId = "projects";
+  } else if (route.name === "project-detail") {
+    const project = state.projects.find((entry) => entry.slug === route.params.slug);
+    details.title = project?.title || "Project not found";
+    details.contentType = "project";
+  }
+
+  return details;
+}
+
+function trackAnalyticsEvent(eventName, params = {}) {
+  if (!eventName || !isAnalyticsReady()) return;
+  window.gtag("event", eventName, {
+    page_path: getRoutePath(),
+    page_location: window.location.href,
+    ...params,
+  });
+}
+
+function trackPageView(route) {
+  if (!isAnalyticsReady()) return;
+  const pagePath = getRoutePath();
+  if (pagePath === lastTrackedPagePath) return;
+  lastTrackedPagePath = pagePath;
+
+  const details = getRouteAnalytics(route);
+  window.gtag("event", "page_view", {
+    page_title: details.title,
+    page_location: window.location.href,
+    page_path: pagePath,
+    route_name: details.routeName,
+    content_type: details.contentType,
+    content_id: details.contentId,
+  });
+}
+
+function getLinkAnalytics(element) {
+  const href = element.getAttribute("href") || element.dataset.href || "";
+  const url = new URL(href || window.location.href, window.location.href);
+  const isHashRoute = href.startsWith("#") || url.hash.startsWith("#/");
+  const isOutbound = url.origin !== window.location.origin && !href.startsWith("mailto:") && !href.startsWith("tel:");
+  const region =
+    element.dataset.analyticsRegion ||
+    element.closest("[data-analytics-region]")?.dataset.analyticsRegion ||
+    "content";
+  const contentType =
+    element.dataset.analyticsContentType ||
+    element.closest("[data-analytics-content-type]")?.dataset.analyticsContentType ||
+    "";
+  const contentId =
+    element.dataset.analyticsContentId ||
+    element.closest("[data-analytics-content-id]")?.dataset.analyticsContentId ||
+    "";
+
+  return {
+    action: element.dataset.analyticsAction || (isHashRoute ? "internal_link_click" : isOutbound ? "outbound_link_click" : "resource_link_click"),
+    region,
+    contentType,
+    contentId,
+    linkUrl: href,
+    linkText: element.dataset.analyticsLabel || element.textContent.trim().replace(/\s+/g, " ").slice(0, 120),
+    linkDomain: href.startsWith("mailto:") ? "mailto" : href.startsWith("tel:") ? "tel" : url.hostname,
+    isOutbound,
+    isHashRoute,
+  };
+}
+
 async function loadEntries() {
   const indexRaw = await loadText(`${CONTENT_ROOT}${CONTENT_INDEX_FILE}`);
   const fileNames = indexRaw
@@ -259,6 +365,11 @@ function renderUi(site, ui) {
   const siteTitle = document.querySelector("#site-title");
   siteTitle.textContent = site.title || "";
   siteTitle.href = "#/";
+  siteTitle.dataset.analyticsAction = "brand_click";
+  siteTitle.dataset.analyticsRegion = "topbar";
+  siteTitle.dataset.analyticsLabel = site.title || "Home";
+  siteTitle.dataset.analyticsContentType = "home";
+  siteTitle.dataset.analyticsContentId = "home";
 
   const search = document.querySelector("#post-search");
   search.placeholder = ui.search_placeholder || "";
@@ -273,6 +384,9 @@ function renderUi(site, ui) {
   const searchSubmit = document.querySelector("#search-submit");
   if (searchSubmit) {
     searchSubmit.textContent = ui.search_button_label || "Search";
+    searchSubmit.dataset.analyticsAction = "search_submit_click";
+    searchSubmit.dataset.analyticsRegion = "topbar";
+    searchSubmit.dataset.analyticsLabel = ui.search_button_label || "Search";
   }
 }
 
@@ -296,14 +410,15 @@ function renderNav(site, routeName) {
         (routeName === "about" && normalized === "about") ||
         ((routeName === "posts" || routeName === "post-detail") && normalized === "posts") ||
         ((routeName === "projects" || routeName === "project-detail") && normalized === "projects");
-      return `<a href="${resolvedHref}"${active ? ' class="is-active"' : ""}>${label.trim()}</a>`;
+      const labelText = label.trim();
+      return `<a href="${resolvedHref}"${active ? ' class="is-active"' : ""} data-analytics-action="nav_click" data-analytics-region="top_nav" data-analytics-label="${escapeAttribute(labelText)}" data-analytics-target-route="${escapeAttribute(resolvedHref)}">${labelText}</a>`;
     })
     .join("");
 }
 
 function renderTagList(tags) {
   return (Array.isArray(tags) ? tags : [])
-    .map((tag) => `<a class="topic-chip" href="${getTagPath(tag)}">#${tag}</a>`)
+    .map((tag) => `<a class="topic-chip" href="${getTagPath(tag)}" data-analytics-action="topic_click" data-analytics-region="topic_list" data-analytics-label="${escapeAttribute(tag)}" data-analytics-content-type="tag" data-analytics-content-id="${escapeAttribute(slugify(tag))}">#${tag}</a>`)
     .join("");
 }
 
@@ -330,7 +445,7 @@ function renderPostCard(post) {
 
   return `
     <article class="post-card" data-motion="rise">
-      <a class="card-link card-link-main motion-tilt${post.image ? " has-card-image" : ""}" href="${getPostPath(post)}"${backgroundStyle}>
+      <a class="card-link card-link-main motion-tilt${post.image ? " has-card-image" : ""}" href="${getPostPath(post)}"${backgroundStyle} data-analytics-action="post_card_click" data-analytics-region="post_card" data-analytics-label="${escapeAttribute(post.title || "")}" data-analytics-content-type="post" data-analytics-content-id="${escapeAttribute(post.slug || "")}">
         <div class="post-card-content">
           <h3>${post.title || ""}</h3>
           <div class="meta-row">
@@ -353,7 +468,7 @@ function renderProjectCard(project) {
 
   return `
     <article class="project-card" data-motion="rise">
-      <a class="card-link card-link-main project-card-link motion-tilt${project.image ? " has-card-image" : ""}" href="${getProjectPath(project)}"${backgroundStyle}>
+      <a class="card-link card-link-main project-card-link motion-tilt${project.image ? " has-card-image" : ""}" href="${getProjectPath(project)}"${backgroundStyle} data-analytics-action="project_card_click" data-analytics-region="project_card" data-analytics-label="${escapeAttribute(project.title || "")}" data-analytics-content-type="project" data-analytics-content-id="${escapeAttribute(project.slug || "")}">
         <div class="post-card-content">
           <h3>${project.title || ""}</h3>
           <p class="summary">${project.summary || ""}</p>
@@ -385,7 +500,7 @@ function renderHomeView() {
         <article class="about-card">
           ${renderProfileMedia(profile, "profile-media--about")}
           <div class="rich-text">${profile.previewHtml || profile.html || ""}</div>
-          <a class="inline-link" href="#/about">${state.uiLabels.read_more || "Read more"} <span>${state.uiLabels.read_more_arrow || ""}</span></a>
+          <a class="inline-link" href="#/about" data-analytics-action="read_more_click" data-analytics-region="about_preview" data-analytics-label="${escapeAttribute(state.uiLabels.read_more || "Read more")}" data-analytics-content-type="page" data-analytics-content-id="about">${state.uiLabels.read_more || "Read more"} <span>${state.uiLabels.read_more_arrow || ""}</span></a>
         </article>
       </section>
       ${profile.topics?.length
@@ -406,10 +521,10 @@ function renderHomeView() {
       ? `
             <article class="hero panel" data-motion="hero">
               ${createSectionTitle(state.uiLabels.featured || "")}
-              <div class="hero-shell motion-tilt${featuredPost.image ? " has-feature-image" : ""}" data-href="${getPostPath(featuredPost)}">
+              <div class="hero-shell motion-tilt${featuredPost.image ? " has-feature-image" : ""}" data-href="${getPostPath(featuredPost)}" data-analytics-action="featured_post_click" data-analytics-region="hero" data-analytics-label="${escapeAttribute(featuredPost.title || "")}" data-analytics-content-type="post" data-analytics-content-id="${escapeAttribute(featuredPost.slug || "")}">
                 ${featuredPost.image
         ? `
-                      <a class="hero-media-link" href="${getPostPath(featuredPost)}" aria-label="${featuredPost.title || ""}">
+                      <a class="hero-media-link" href="${getPostPath(featuredPost)}" aria-label="${featuredPost.title || ""}" data-analytics-action="featured_post_media_click" data-analytics-region="hero" data-analytics-label="${escapeAttribute(featuredPost.title || "")}" data-analytics-content-type="post" data-analytics-content-id="${escapeAttribute(featuredPost.slug || "")}">
                         <div class="hero-media">
                           <img class="feature-image" src="${featuredPost.image}" alt="${featuredPost.image_alt || featuredPost.title || ""}" />
                         </div>
@@ -418,7 +533,7 @@ function renderHomeView() {
         : ""
       }
                 <div class="hero-content">
-                  <a class="hero-title-link" href="${getPostPath(featuredPost)}">
+                  <a class="hero-title-link" href="${getPostPath(featuredPost)}" data-analytics-action="featured_post_title_click" data-analytics-region="hero" data-analytics-label="${escapeAttribute(featuredPost.title || "")}" data-analytics-content-type="post" data-analytics-content-id="${escapeAttribute(featuredPost.slug || "")}">
                     <h1 class="hero-title">${featuredPost.title || ""}</h1>
                   </a>
                   <div class="meta-row">
@@ -475,8 +590,8 @@ function renderHomeView() {
                         <p class="summary">${skill.summary || ""}</p>
                         ${skill.repo || skill.docs
               ? `<div class="skill-links">
-                                ${skill.repo ? `<a class="pill-link" href="${skill.repo}">${state.uiLabels.skill_repo_label || ""}</a>` : ""}
-                                ${skill.docs ? `<a class="pill-link" href="${skill.docs}">${state.uiLabels.skill_docs_label || ""}</a>` : ""}
+                                ${skill.repo ? `<a class="pill-link" href="${skill.repo}" data-analytics-action="skill_resource_click" data-analytics-region="skill_card" data-analytics-label="${escapeAttribute(`${skill.title || "Skill"} repository`)}" data-analytics-content-type="skill" data-analytics-content-id="${escapeAttribute(slugify(skill.title || skill.file || ""))}">${state.uiLabels.skill_repo_label || ""}</a>` : ""}
+                                ${skill.docs ? `<a class="pill-link" href="${skill.docs}" data-analytics-action="skill_resource_click" data-analytics-region="skill_card" data-analytics-label="${escapeAttribute(`${skill.title || "Skill"} docs`)}" data-analytics-content-type="skill" data-analytics-content-id="${escapeAttribute(slugify(skill.title || skill.file || ""))}">${state.uiLabels.skill_docs_label || ""}</a>` : ""}
                               </div>`
               : ""
             }
@@ -552,7 +667,7 @@ function renderHomeView() {
             <section class="panel" data-motion="rise">
         ${createSectionTitle(state.ai.panel_title || "")}
         ${state.ai.panel_intro ? `<p class="panel-copy">${state.ai.panel_intro}</p>` : ""}
-        ${aiLinks.length ? `<div class="ai-links">${aiLinks.map((entry) => `<a class="pill-link" href="${entry.value}">${entry.key}</a>`).join("")}</div>` : ""}
+        ${aiLinks.length ? `<div class="ai-links">${aiLinks.map((entry) => `<a class="pill-link" href="${entry.value}" data-analytics-action="ai_resource_click" data-analytics-region="ai_panel" data-analytics-label="${escapeAttribute(entry.key)}">${entry.key}</a>`).join("")}</div>` : ""}
       </section>
     `
       : ""
@@ -566,7 +681,7 @@ function renderHomeView() {
                 ${contactLinks
         .map(
           (entry) => `
-                      <a class="contact-item" href="${entry.value}">
+                      <a class="contact-item" href="${entry.value}" data-analytics-action="contact_link_click" data-analytics-region="home_connect" data-analytics-label="${escapeAttribute(entry.key)}">
                         <span class="contact-label">${entry.key}</span>
                         <span>${entry.value.replace(/^https?:\/\//, "")}</span>
                       </a>
@@ -594,7 +709,6 @@ function renderPageIntro(eyebrow, title, copy) {
 
 function renderAboutView() {
   const links = parsePairs(state.profile.links);
-  console.log("Parsed profile links:", links);
   return `
     <section class="page-view">
       ${renderPageIntro("Profile", state.profile.name || "About", state.profile.tagline || "")}
@@ -612,7 +726,7 @@ function renderAboutView() {
                     ${links
         .map(
           (entry) => `
-                          <a class="contact-item" href="${entry.value}">
+                          <a class="contact-item" href="${entry.value}" data-analytics-action="contact_link_click" data-analytics-region="about_connect" data-analytics-label="${escapeAttribute(entry.key)}">
                             <span class="contact-label">${entry.key}</span>
                             <span>${entry.label || entry.value.replace(/^https?:\/\//, "").replace(/^mailto:/, "").replace(/^tel:/, "")}</span>
                           </a>
@@ -694,7 +808,7 @@ function renderPostDetailView(post) {
 
   return `
     <article class="page-view article-view">
-      <a class="back-link" href="#/posts" data-motion="rise">← Back to posts</a>
+      <a class="back-link" href="#/posts" data-motion="rise" data-analytics-action="back_link_click" data-analytics-region="post_detail" data-analytics-label="Back to posts">← Back to posts</a>
       ${renderPageIntro("Writing", post.title || "", post.summary || "")}
       ${post.image ? `<img class="detail-image" data-motion="rise" src="${post.image}" alt="${post.image_alt || post.title || ""}" />` : ""}
       <div class="meta-row article-meta" data-motion="rise">
@@ -734,7 +848,7 @@ function renderProjectDetailView(project) {
 
   return `
     <article class="page-view article-view">
-      <a class="back-link" href="#/projects" data-motion="rise">← Back to projects</a>
+      <a class="back-link" href="#/projects" data-motion="rise" data-analytics-action="back_link_click" data-analytics-region="project_detail" data-analytics-label="Back to projects">← Back to projects</a>
       ${renderPageIntro("Projects", project.title || "", project.summary || "")}
       ${project.image ? `<img class="detail-image" data-motion="rise" src="${project.image}" alt="${project.image_alt || project.title || ""}" />` : ""}
       <section data-motion="rise">
@@ -930,6 +1044,7 @@ function renderRoute() {
     app.innerHTML = renderAboutView();
     initializePageMotion();
     initializeProfileMedia();
+    trackPageView(route);
     return;
   }
 
@@ -937,6 +1052,7 @@ function renderRoute() {
     app.innerHTML = renderPostsView(route);
     initializePageMotion();
     initializeProfileMedia();
+    trackPageView(route);
     return;
   }
 
@@ -945,6 +1061,7 @@ function renderRoute() {
     app.innerHTML = renderPostDetailView(post);
     initializePageMotion();
     initializeProfileMedia();
+    trackPageView(route);
     return;
   }
 
@@ -952,6 +1069,7 @@ function renderRoute() {
     app.innerHTML = renderProjectsView();
     initializePageMotion();
     initializeProfileMedia();
+    trackPageView(route);
     return;
   }
 
@@ -960,12 +1078,14 @@ function renderRoute() {
     app.innerHTML = renderProjectDetailView(project);
     initializePageMotion();
     initializeProfileMedia();
+    trackPageView(route);
     return;
   }
 
   app.innerHTML = renderHomeView();
   initializePageMotion();
   initializeProfileMedia();
+  trackPageView(route);
 }
 
 function initializeThemeToggle() {
@@ -977,6 +1097,11 @@ function initializeThemeToggle() {
     const nextTheme = getTheme() === "dark" ? "light" : "dark";
     root.dataset.theme = nextTheme;
     localStorage.setItem("theme", nextTheme);
+    trackAnalyticsEvent("theme_change", {
+      event_category: "engagement",
+      theme: nextTheme,
+      ui_region: "topbar",
+    });
   });
 }
 
@@ -993,6 +1118,11 @@ function initializeSearch() {
     event.preventDefault();
     const nextQuery = search.value || "";
     state.searchQuery = nextQuery;
+    trackAnalyticsEvent("search", {
+      search_term: nextQuery.trim(),
+      event_category: "site_search",
+      ui_region: "topbar",
+    });
     window.location.hash = getSearchRoute(nextQuery).replace(/^#/, "");
   });
 }
@@ -1008,7 +1138,8 @@ function initializeHeroCardNavigation() {
 }
 
 function initializeAnalytics(measurementId) {
-  if (!measurementId || !/^G-[A-Z0-9]+$/i.test(measurementId) || window.gtag) return;
+  if (!measurementId || !/^G-[A-Z0-9]+$/i.test(measurementId)) return;
+  if (window.gtag) return;
 
   const script = document.createElement("script");
   script.async = true;
@@ -1020,7 +1151,29 @@ function initializeAnalytics(measurementId) {
     window.dataLayer.push(arguments);
   };
   window.gtag("js", new Date());
-  window.gtag("config", measurementId);
+  window.gtag("config", measurementId, { send_page_view: false });
+}
+
+function initializeAnalyticsTracking() {
+  document.addEventListener("click", (event) => {
+    const target = event.target.closest("a[href], [data-href], button[data-analytics-action]");
+    if (!target) return;
+    if (target.id === "theme-toggle") return;
+
+    const analytics = getLinkAnalytics(target);
+    const eventName = analytics.isOutbound ? "click" : analytics.action;
+    trackAnalyticsEvent(eventName, {
+      event_category: analytics.isHashRoute ? "internal_navigation" : "link_click",
+      link_url: analytics.linkUrl,
+      link_text: analytics.linkText,
+      link_domain: analytics.linkDomain,
+      outbound: analytics.isOutbound,
+      ui_region: analytics.region,
+      link_action: analytics.action,
+      content_type: analytics.contentType,
+      content_id: analytics.contentId,
+    });
+  });
 }
 
 async function init() {
@@ -1071,7 +1224,8 @@ async function init() {
     initializeHeroCardNavigation();
     initializeInteractiveMotion();
     initializeTopbarMotion();
-    initializeAnalytics(state.profile.ga_measurement_id);
+    initializeAnalytics(GA_MEASUREMENT_ID);
+    initializeAnalyticsTracking();
     window.addEventListener("hashchange", renderRoute);
     renderRoute();
   } catch (error) {

@@ -2,99 +2,87 @@
 
 ## Overview
 
-Add the official Google Analytics `gtag.js` snippet directly to the `index.html` head. The snippet remains independent from existing inline bootstrap scripts and the `main.js` module.
+Use the existing head-level GA tag for loading `gtag.js`, but disable its automatic page view. Add a lightweight analytics layer in `main.js` that sends manual SPA page views after route rendering and delegates click tracking from generated `data-analytics-*` attributes.
 
 ## Architecture
 
-### Component Diagram
-
 ```mermaid
 graph TB
-    Browser[Browser] --> Index[index.html head]
-    Index --> GTag[Google gtag.js async loader]
-    Index --> Theme[Existing theme bootstrap]
-    Index --> Title[Existing title bootstrap]
-    Index --> App[Existing main.js module]
+    Index[index.html] --> GTag[gtag.js config with send_page_view false]
+    Main[main.js] --> Router[Hash router]
+    Router --> PageView[Manual page_view]
+    Main --> Renderers[Generated links and controls]
+    Renderers --> DataAttrs[data-analytics attributes]
+    DataAttrs --> Delegate[Document click delegate]
+    Search[Search submit] --> Event[search event]
+    Theme[Theme toggle] --> Event
+    Delegate --> Event[gtag event payloads]
 ```
 
-### Components
+## Event Taxonomy
 
-#### Google Analytics Tag
-**Purpose**: Load Google Analytics and configure measurement ID `G-EHDL9M60FS`.
-**Responsibilities**:
-- Initialize `window.dataLayer`.
-- Define `gtag`.
-- Send `js` and `config` initialization calls.
+| Event | Trigger | Key Parameters |
+|-------|---------|----------------|
+| `page_view` | Route render when hash path changes | `page_title`, `page_location`, `page_path`, `route_name`, `content_type`, `content_id` |
+| `nav_click` | Top navigation link | `ui_region`, `link_url`, `link_text`, `link_action` |
+| `brand_click` | Site title link | `content_type=home`, `content_id=home` |
+| `read_more_click` | Home about preview link | `content_type=page`, `content_id=about` |
+| `topic_click` | Topic/tag chips | `content_type=tag`, `content_id=<tag slug>` |
+| `featured_post_click` | Hero shell click | `content_type=post`, `content_id=<post slug>` |
+| `featured_post_media_click` | Hero media link | `content_type=post`, `content_id=<post slug>` |
+| `featured_post_title_click` | Hero title link | `content_type=post`, `content_id=<post slug>` |
+| `post_card_click` | Post cards | `content_type=post`, `content_id=<post slug>` |
+| `project_card_click` | Project cards | `content_type=project`, `content_id=<project slug>` |
+| `back_link_click` | Detail page back links | `ui_region=post_detail/project_detail` |
+| `ai_resource_click` | AI panel resource links | `ui_region=ai_panel` |
+| `skill_resource_click` | Skill repo/docs links | `content_type=skill`, `content_id=<skill slug>` |
+| `contact_link_click` | Contact links | `ui_region=home_connect/about_connect` |
+| `resource_link_click` | Generic same-domain non-hash links | `link_url`, `link_text` |
+| `click` | Outbound links | `outbound=true`, `link_domain` |
+| `search` | Search form submit | `search_term`, `ui_region=topbar` |
+| `theme_change` | Theme toggle | `theme`, `ui_region=topbar` |
 
-#### Existing Page Bootstrap
-**Purpose**: Preserve current site initialization.
-**Responsibilities**:
-- Set initial theme.
-- Load dynamic title.
-- Load styles and `main.js`.
+## Implementation Details
 
-### Data Flow
+### `index.html`
 
-1. Browser parses `index.html`.
-2. Async Google tag loader starts loading without blocking page parsing.
-3. Inline `gtag` setup initializes the data layer and configures the measurement ID.
-4. Existing site scripts continue to run as before.
-
-## Technical Decisions
-
-| Decision | Options Considered | Choice | Rationale |
-|----------|-------------------|--------|-----------|
-| Placement | Head, body end, app module | Head | Matches Google snippet expectations and avoids coupling analytics to app logic |
-| Implementation | Exact inline snippet, helper file | Exact inline snippet | Smallest change and matches user-provided code |
-| Dependencies | Add package, no package | No package | Static site only needs the hosted script |
-
-## File Structure
-
-| File | Action | Purpose |
-|------|--------|---------|
-| `index.html` | Modify | Add Google Analytics loader and config |
-
-## Interfaces
+- Keep the existing Google tag loader.
+- Change the config call to:
 
 ```javascript
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag("config", "G-EHDL9M60FS");
+gtag("config", "G-EHDL9M60FS", { send_page_view: false });
 ```
+
+### `main.js`
+
+- Add `GA_MEASUREMENT_ID`.
+- Add helper functions:
+  - `isAnalyticsReady`
+  - `getRoutePath`
+  - `getRouteAnalytics`
+  - `trackAnalyticsEvent`
+  - `trackPageView`
+  - `getLinkAnalytics`
+  - `initializeAnalyticsTracking`
+- Call `trackPageView(route)` after each route's DOM is rendered.
+- Add `data-analytics-*` attributes in render functions for stable reporting.
+- Track search and theme interactions directly from their existing listeners.
 
 ## Error Handling
 
-| Error Scenario | Handling Strategy | User Impact |
-|----------------|-------------------|-------------|
-| Google script fails to load | Browser ignores failed async script | Site continues to work |
-
-## Edge Cases
-
-- **Analytics blocked**: Existing page behavior is unaffected because no app code depends on `gtag`.
-- **Repeated page load**: Standard snippet initializes per page load.
-
-## Dependencies
-
-| Package | Version | Purpose |
-|---------|---------|---------|
-| None | N/A | No package dependency required |
-
-## Security Considerations
-
-- The only new external script source is the user-provided Google Tag Manager URL.
-
-## Performance Considerations
-
-- The loader uses `async` to avoid blocking parsing.
+| Scenario | Handling |
+|----------|----------|
+| `gtag` blocked or unavailable | Tracking functions return without affecting UI |
+| Re-render of same route | `lastTrackedPagePath` prevents duplicate page views |
+| Link lacks explicit metadata | Delegate falls back to text, URL, domain, and internal/resource/outbound classification |
 
 ## Test Strategy
 
-### Static Verification
-- Confirm `index.html` contains the Google loader URL and config measurement ID.
-- Confirm existing `main.js` module and head scripts remain present.
-
-## Existing Patterns to Follow
-
-Based on codebase analysis:
-- Keep simple page bootstrap logic in `index.html`.
-- Avoid changing app-level JavaScript for document-level tags.
+- Run `node --check main.js`.
+- Static search for `send_page_view`, analytics helper functions, and `data-analytics-*` attributes.
+- Browser verification on a local server:
+  - Initial home `page_view`.
+  - Nav click to `#/posts` and listing `page_view`.
+  - Search submit event and query route `page_view`.
+  - Theme toggle event.
+  - Post card click and post detail `page_view`.
