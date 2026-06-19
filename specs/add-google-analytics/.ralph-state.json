@@ -1,0 +1,17 @@
+{
+  "source": "spec",
+  "name": "add-google-analytics",
+  "basePath": "/Users/zhiping/Desktop/source/zhiping-github-page/specs/add-google-analytics",
+  "phase": "complete",
+  "taskIndex": 1,
+  "totalTasks": 1,
+  "taskIteration": 1,
+  "maxTaskIterations": 5,
+  "globalIteration": 1,
+  "maxGlobalIterations": 100,
+  "commitSpec": true,
+  "relatedSpecs": [],
+  "awaitingApproval": false,
+  "quickMode": true,
+  "granularity": "coarse"
+}
